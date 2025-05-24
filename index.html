@@ -6,22 +6,29 @@
 <title>My Gaming PC</title>
 <style>
   :root {
-    --bg-dark: #0f0f0f;
-    --bg-light: #f4f4f4;
-    --text-dark: #ffffff;
-    --text-light: #222222;
+    --bg: #0f0f0f;
+    --text: #ffffff;
     --accent: #00ffcc;
-    --card-bg-dark: #1a1a1a;
-    --card-bg-light: #ffffff;
-    --shadow-dark: rgba(0,255,204,0.2);
-    --shadow-light: rgba(0,255,204,0.15);
+    --card-bg: #1a1a1a;
+    --shadow: rgba(0,255,204,0.2);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f4f4;
+      --text: #222222;
+      --accent: #008f7a;
+      --card-bg: #ffffff;
+      --shadow: rgba(0,255,204,0.15);
+    }
   }
 
   body {
-    margin: 0; padding: 20px;
+    margin: 0;
+    padding: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
+    background-color: var(--bg);
+    color: var(--text);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,8 +37,13 @@
   }
 
   body.light {
-    background-color: var(--bg-light);
-    color: var(--text-light);
+    --bg: #f4f4f4;
+    --text: #222222;
+    --accent: #008f7a;
+    --card-bg: #ffffff;
+    --shadow: rgba(0,255,204,0.15);
+    background-color: var(--bg);
+    color: var(--text);
   }
 
   h1 {
@@ -41,25 +53,16 @@
     animation: fadeIn 1.5s ease-out;
   }
 
-  body.light h1 {
-    color: #008f7a;
-  }
-
   .component {
     width: 100%;
     max-width: 600px;
-    background: var(--card-bg-dark);
+    background: var(--card-bg);
     border-radius: 12px;
     margin: 10px 0;
     padding: 20px;
-    box-shadow: 0 0 20px var(--shadow-dark);
+    box-shadow: 0 0 20px var(--shadow);
     transition: transform 0.3s ease, background-color 0.4s, box-shadow 0.4s;
     animation: slideUp 0.5s ease forwards;
-  }
-
-  body.light .component {
-    background: var(--card-bg-light);
-    box-shadow: 0 0 15px var(--shadow-light);
   }
 
   .component:hover {
@@ -72,10 +75,6 @@
     font-weight: bold;
     margin-bottom: 8px;
     font-size: 1.2rem;
-  }
-
-  body.light .title {
-    color: #008f7a;
   }
 
   @keyframes slideUp {
@@ -97,32 +96,25 @@
     }
   }
 
-  /* Переключатель темы */
   .theme-toggle {
     position: fixed;
     top: 15px;
     right: 15px;
-    background: var(--card-bg-dark);
+    background: var(--card-bg);
     border: none;
     border-radius: 20px;
     padding: 10px 15px;
     color: var(--accent);
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 0 10px var(--shadow-dark);
+    box-shadow: 0 0 10px var(--shadow);
     transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
-  }
-
-  body.light .theme-toggle {
-    background: var(--card-bg-light);
-    color: #008f7a;
-    box-shadow: 0 0 10px var(--shadow-light);
   }
 </style>
 </head>
 <body>
 
-<button class="theme-toggle" aria-label="Toggle light/dark theme">🌙</button>
+<button class="theme-toggle" aria-label="Toggle light/dark theme" aria-pressed="false">🌙</button>
 
 <h1>Accessories</h1>
 
@@ -173,15 +165,46 @@
 
 <script>
   const btn = document.querySelector('.theme-toggle');
-  btn.addEventListener('click', () => {
-    document.body.classList.toggle('light');
-    // Меняем иконку
-    if(document.body.classList.contains('light')){
+
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      document.body.classList.add('light');
       btn.textContent = '☀️';
+      btn.setAttribute('aria-pressed', 'true');
     } else {
+      document.body.classList.remove('light');
       btn.textContent = '🌙';
+      btn.setAttribute('aria-pressed', 'false');
+    }
+  }
+
+  function getSystemTheme() {
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
+  function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else {
+      applyTheme(getSystemTheme());
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    const isLight = document.body.classList.contains('light');
+    const newTheme = isLight ? 'dark' : 'light';
+    applyTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) {
+      applyTheme(e.matches ? 'light' : 'dark');
     }
   });
+
+  window.addEventListener('DOMContentLoaded', loadTheme);
 </script>
 
 </body>
