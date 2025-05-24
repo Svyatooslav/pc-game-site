@@ -1,88 +1,98 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Мои комплектующие — Геймерский стиль</title>
-    <style>
-        @keyframes pulse {
-            0%, 100% {
-                text-shadow: 0 0 8px #00ff99;
-                color: #00ff99;
-            }
-            50% {
-                text-shadow: 0 0 20px #00ff99;
-                color: #a0ffcc;
-            }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PC Accessories</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      animation: fadeIn 2s ease;
+    }
 
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #00ffff;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 0 20px;
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: pulse 3s infinite;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background-color: #1e1e1e;
-            margin-bottom: 12px;
-            padding: 12px 15px;
-            border-radius: 6px;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
-            font-size: 18px;
-            opacity: 0;
-            animation: fadeInUp 0.6s forwards;
-        }
-        li:nth-child(1) { animation-delay: 0.1s; }
-        li:nth-child(2) { animation-delay: 0.2s; }
-        li:nth-child(3) { animation-delay: 0.3s; }
-        li:nth-child(4) { animation-delay: 0.4s; }
-        li:nth-child(5) { animation-delay: 0.5s; }
-        li:nth-child(6) { animation-delay: 0.6s; }
-        li:nth-child(7) { animation-delay: 0.7s; }
-        li:nth-child(8) { animation-delay: 0.8s; }
-        li:nth-child(9) { animation-delay: 0.9s; }
+    section {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      padding: 20px 30px;
+      max-width: 600px;
+      width: 100%;
+      animation: slideUp 1s ease;
+    }
 
-        li strong {
-            display: inline-block;
-            width: 120px;
-            color: #00ff99;
-        }
-    </style>
+    section h2 {
+      color: #00ccff;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 10px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 15px 20px;
+      }
+
+      section h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Accessories</h1>
+  <h1>Accessories</h1>
+  <section>
+    <h2>Configuration</h2>
     <ul>
-        <li><strong>Video card</strong> ASUS GeForce RTX 4060 Ti Dual EVO OC Edition</li>
-        <li><strong>CPU</strong> Intel® Core™ i5-12400F</li>
-        <li><strong>Motherboard</strong> ASUS PRIME B760M-K D4</li>
-        <li><strong>Cooling</strong> DeepCool AG400 BK ARGB</li>
-        <li><strong>RAM</strong> 32GB Kingston FURY Renegade RGB</li>
-        <li><strong>SSD drive</strong> 2TB Samsung 990 PRO [7450MB/s, Gen4]</li>
-        <li><strong>Power unit</strong> 750W DeepCool PN750M</li>
-        <li><strong>Frame</strong> LIAN LI O11 Vision</li>
-        <li><strong>Fans</strong> —</li>
+      <li><strong>Video card:</strong> ASUS GeForce RTX 4060 Ti Dual EVO OC Edition</li>
+      <li><strong>CPU:</strong> Intel® Core™ i5-12400F</li>
+      <li><strong>Motherboard:</strong> ASUS PRIME B760M-K D4</li>
+      <li><strong>Cooling:</strong> DeepCool AG400 BK ARGB</li>
+      <li><strong>RAM:</strong> 32GB Kingston FURY Renegade RGB</li>
+      <li><strong>SSD:</strong> 2TB Samsung 990 PRO [7450MB/s, Gen4]</li>
+      <li><strong>Power Unit:</strong> 750W DeepCool PN750M</li>
+      <li><strong>Frame:</strong> LIAN LI O11 Vision</li>
+      <li><strong>Fans:</strong> —</li>
     </ul>
+  </section>
 </body>
 </html>
