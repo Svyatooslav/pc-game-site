@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,8 +51,9 @@
     -webkit-text-fill-color: transparent;
     animation: gradientShift 8s ease infinite, fadeIn 1.5s ease forwards;
     opacity: 0;
-    position: relative;
-    will-change: transform;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
   }
 
   .component {
@@ -72,16 +74,14 @@
     box-shadow: 0 12px 24px var(--shadow);
   }
 
-  .component:nth-child(2) { animation-delay: 0.3s; }
-  .component:nth-child(3) { animation-delay: 0.5s; }
-  .component:nth-child(4) { animation-delay: 0.7s; }
-  .component:nth-child(5) { animation-delay: 0.9s; }
-  .component:nth-child(6) { animation-delay: 1.1s; }
-  .component:nth-child(7) { animation-delay: 1.3s; }
-  .component:nth-child(8) { animation-delay: 1.5s; }
-  .component:nth-child(9) { animation-delay: 1.7s; }
-  .component:nth-child(10) { animation-delay: 1.9s; }
-  .component:nth-child(11) { animation-delay: 2.1s; }
+  .component:nth-child(2) { animation-delay: 0.2s; }
+  .component:nth-child(3) { animation-delay: 0.4s; }
+  .component:nth-child(4) { animation-delay: 0.6s; }
+  .component:nth-child(5) { animation-delay: 0.8s; }
+  .component:nth-child(6) { animation-delay: 1s; }
+  .component:nth-child(7) { animation-delay: 1.2s; }
+  .component:nth-child(8) { animation-delay: 1.4s; }
+  .component:nth-child(9) { animation-delay: 1.6s; }
 
   .title {
     color: var(--accent-start);
