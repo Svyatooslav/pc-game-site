@@ -50,6 +50,8 @@
       position: relative;
       will-change: transform;
       text-align: center;
+      cursor: pointer;
+      user-select: none;
     }
 
     main {
@@ -122,7 +124,7 @@
 </head>
 <body>
 
-<h1 id="pageTitle">My gaming computer</h1>
+<h1 id="pageTitle" tabindex="0" role="button" aria-label="Reload page by clicking the title">My gaming computer</h1>
 
 <main>
   <section class="component" role="region" aria-label="Video Card">
@@ -206,6 +208,17 @@
   } else {
     components.forEach(component => component.classList.add('visible'));
   }
+
+  title.addEventListener('click', () => {
+    location.reload();
+  });
+
+  title.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      location.reload();
+    }
+  });
 </script>
 
 </body>
