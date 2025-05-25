@@ -170,27 +170,40 @@
 
 <script>
   const title = document.getElementById('pageTitle');
+
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-    title.style.transform = `translateY(${scrollPos * 0.3}px)`;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrollPos = window.scrollY;
+        title.style.transform = `translateY(${scrollPos * 0.3}px)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 
   const components = document.querySelectorAll('.component');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
 
-  components.forEach(component => {
-    observer.observe(component);
-  });
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 150);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    components.forEach(component => observer.observe(component));
+  } else {
+    components.forEach(component => component.classList.add('visible'));
+  }
 </script>
 
 </body>
-    </html>
+</html>
