@@ -41,11 +41,11 @@
     font-size: 3rem;
     margin-bottom: 20px;
     font-weight: 600;
-    background: linear-gradient(270deg, var(--accent-start), var(--accent-end));
-    background-size: 400% 400%;
+    background: linear-gradient(90deg, #0071e3, #a259ff, #fc5c7d, #fd7e14);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientShift 8s ease infinite, fadeIn 1.5s ease forwards;
+    animation: gradientApple 6s ease infinite, fadeIn 1.5s ease forwards;
     opacity: 0;
     position: relative;
     will-change: transform;
@@ -111,7 +111,7 @@
     to { opacity: 1; }
   }
 
-  @keyframes gradientShift {
+  @keyframes gradientApple {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
