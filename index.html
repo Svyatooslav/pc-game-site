@@ -50,8 +50,13 @@
       position: relative;
       will-change: transform;
       text-align: center;
-      cursor: pointer;
       user-select: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    h1:focus {
+      outline: none;
     }
 
     main {
@@ -67,26 +72,30 @@
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 8px var(--shadow-color);
-      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
-                  box-shadow 0.3s ease, 
-                  opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: slideUp 0.6s ease forwards;
+      animation-delay: calc(0.2s * var(--order));
       display: flex;
       flex-direction: column;
       justify-content: center;
       min-height: 100px;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .component.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .component:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 24px var(--shadow-color);
     }
+
+    .component:nth-of-type(1) { --order: 1; }
+    .component:nth-of-type(2) { --order: 2; }
+    .component:nth-of-type(3) { --order: 3; }
+    .component:nth-of-type(4) { --order: 4; }
+    .component:nth-of-type(5) { --order: 5; }
+    .component:nth-of-type(6) { --order: 6; }
+    .component:nth-of-type(7) { --order: 7; }
+    .component:nth-of-type(8) { --order: 8; }
+    .component:nth-of-type(9) { --order: 9; }
 
     .title {
       color: var(--accent-start);
@@ -98,6 +107,11 @@
 
     .component:hover .title {
       color: var(--accent-end);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeIn {
@@ -117,109 +131,80 @@
       .component {
         padding: 15px;
         min-height: 80px;
-        transition: transform 0.8s ease, box-shadow 0.3s ease, opacity 0.8s ease;
       }
     }
   </style>
 </head>
 <body>
 
-<h1 id="pageTitle" tabindex="0" role="button" aria-label="Reload page by clicking the title">My gaming computer</h1>
+  <h1 id="pageTitle" tabindex="0" role="button" aria-label="Reload page">Accessories</h1>
 
-<main>
-  <section class="component" role="region" aria-label="Video Card">
-    <div class="title">Video Card</div>
-    ASUS GeForce RTX 4060 Ti Dual EVO OC Edition
-  </section>
+  <main>
+    <section class="component" role="region" aria-label="Video Card">
+      <div class="title">Video Card</div>
+      ASUS GeForce RTX 4060 Ti Dual EVO OC Edition
+    </section>
 
-  <section class="component" role="region" aria-label="CPU">
-    <div class="title">CPU</div>
-    Intel® Core™ i5-12400F
-  </section>
+    <section class="component" role="region" aria-label="CPU">
+      <div class="title">CPU</div>
+      Intel® Core™ i5-12400F
+    </section>
 
-  <section class="component" role="region" aria-label="Motherboard">
-    <div class="title">Motherboard</div>
-    ASUS PRIME B760M-K D4
-  </section>
+    <section class="component" role="region" aria-label="Motherboard">
+      <div class="title">Motherboard</div>
+      ASUS PRIME B760M-K D4
+    </section>
 
-  <section class="component" role="region" aria-label="Cooling">
-    <div class="title">Cooling</div>
-    DeepCool AG400 BK ARGB
-  </section>
+    <section class="component" role="region" aria-label="Cooling">
+      <div class="title">Cooling</div>
+      DeepCool AG400 BK ARGB
+    </section>
 
-  <section class="component" role="region" aria-label="RAM">
-    <div class="title">RAM</div>
-    32GB Kingston FURY Renegade RGB
-  </section>
+    <section class="component" role="region" aria-label="RAM">
+      <div class="title">RAM</div>
+      32GB Kingston FURY Renegade RGB
+    </section>
 
-  <section class="component" role="region" aria-label="SSD Drive">
-    <div class="title">SSD Drive</div>
-    2TB Samsung 990 PRO [7450MB/s, Gen4]
-  </section>
+    <section class="component" role="region" aria-label="SSD Drive">
+      <div class="title">SSD Drive</div>
+      2TB Samsung 990 PRO [7450MB/s, Gen4]
+    </section>
 
-  <section class="component" role="region" aria-label="Power Unit">
-    <div class="title">Power Unit</div>
-    750W DeepCool PN750M
-  </section>
+    <section class="component" role="region" aria-label="Power Unit">
+      <div class="title">Power Unit</div>
+      750W DeepCool PN750M
+    </section>
 
-  <section class="component" role="region" aria-label="Frame">
-    <div class="title">Frame</div>
-    LIAN LI O11 Vision
-  </section>
+    <section class="component" role="region" aria-label="Frame">
+      <div class="title">Frame</div>
+      LIAN LI O11 Vision
+    </section>
 
-  <section class="component" role="region" aria-label="Fans">
-    <div class="title">Fans</div>
-    LIAN LI UNI FAN TL LCD 140
-  </section>
-</main>
+    <section class="component" role="region" aria-label="Fans">
+      <div class="title">Fans</div>
+      LIAN LI UNI FAN TL LCD 140
+    </section>
+  </main>
 
-<script>
-  const title = document.getElementById('pageTitle');
+  <script>
+    const title = document.getElementById('pageTitle');
 
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        const scrollPos = window.scrollY;
-        title.style.transform = `translateY(${scrollPos * 0.3}px)`;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  const components = document.querySelectorAll('.component');
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 300);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      title.style.transform = `translateY(${scrollPos * 0.3}px)`;
     });
 
-    components.forEach(component => observer.observe(component));
-  } else {
-    components.forEach(component => component.classList.add('visible'));
-  }
-
-  title.addEventListener('click', () => {
-    location.reload();
-  });
-
-  title.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
+    title.addEventListener('click', () => {
       location.reload();
-    }
-  });
-</script>
+    });
+
+    title.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        location.reload();
+      }
+    });
+  </script>
 
 </body>
 </html>
