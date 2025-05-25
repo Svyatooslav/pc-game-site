@@ -1,136 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>My Gaming PC</title>
-<style>
-  :root {
-    --bg: #ffffff;
-    --text: #000000;
-    --accent-start: #0071e3;
-    --accent-end: #0a84ff;
-    --card-bg: #f9f9f9;
-    --shadow-color: #0071e3;
-  }
-
-  @media (prefers-color-scheme: dark) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Gaming PC</title>
+  <style>
     :root {
-      --bg: #000000;
-      --text: #ffffff;
-      --accent-start: #0a84ff;
-      --accent-end: #0071e3;
-      --card-bg: #121212;
-      --shadow-color: #0051bb;
+      --bg: #ffffff;
+      --text: #000000;
+      --accent-start: #0071e3;
+      --accent-end: #0a84ff;
+      --card-bg: #f9f9f9;
+      --shadow-color: #0071e3;
     }
-  }
 
-  body {
-    margin: 0;
-    padding: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    scroll-behavior: smooth;
-    transition: background-color 0.4s, color 0.4s;
-    overflow-x: hidden;
-  }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #000000;
+        --text: #ffffff;
+        --accent-start: #0a84ff;
+        --accent-end: #0071e3;
+        --card-bg: #121212;
+        --shadow-color: #0051bb;
+      }
+    }
 
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    font-weight: 600;
-    background: linear-gradient(90deg, #0071e3, #a259ff, #fc5c7d, #fd7e14);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientApple 6s ease infinite, fadeIn 1.5s ease forwards;
-    opacity: 0;
-    position: relative;
-    will-change: transform;
-    text-align: center;
-  }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+      transition: background-color 0.4s, color 0.4s;
+      overflow-x: hidden;
+    }
 
-  main {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
-  .component {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
-    animation: slideUp 0.6s ease forwards;
-    animation-delay: calc(0.2s * var(--order));
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100px;
-  }
-
-  .component:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px var(--shadow-color);
-  }
-
-  .component:nth-of-type(1) { --order: 1; }
-  .component:nth-of-type(2) { --order: 2; }
-  .component:nth-of-type(3) { --order: 3; }
-  .component:nth-of-type(4) { --order: 4; }
-  .component:nth-of-type(5) { --order: 5; }
-  .component:nth-of-type(6) { --order: 6; }
-  .component:nth-of-type(7) { --order: 7; }
-  .component:nth-of-type(8) { --order: 8; }
-  .component:nth-of-type(9) { --order: 9; }
-
-  .title {
-    color: var(--accent-start);
-    font-weight: 600;
-    margin-bottom: 8px;
-    font-size: 1.25rem;
-    transition: color 0.3s ease;
-  }
-
-  .component:hover .title {
-    color: var(--accent-end);
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-
-  @keyframes gradientApple {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  @media (max-width: 600px) {
     h1 {
-      font-size: 2rem;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #0071e3, #a259ff, #fc5c7d, #fd7e14);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientApple 6s ease infinite, fadeIn 1.5s ease forwards;
+      opacity: 0;
+      position: relative;
+      will-change: transform;
+      text-align: center;
     }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
     .component {
-      padding: 15px;
-      min-height: 80px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px var(--shadow-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100px;
+      opacity: 0;
+      transform: translateY(20px);
     }
-  }
-</style>
+
+    .component.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .component:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px var(--shadow-color);
+    }
+
+    .title {
+      color: var(--accent-start);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+      transition: color 0.3s ease;
+    }
+
+    .component:hover .title {
+      color: var(--accent-end);
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes gradientApple {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .component {
+        padding: 15px;
+        min-height: 80px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h1 id="pageTitle">Accessories</h1>
+<h1 id="pageTitle">My gaming computer</h1>
 
 <main>
   <section class="component" role="region" aria-label="Video Card">
@@ -181,12 +170,27 @@
 
 <script>
   const title = document.getElementById('pageTitle');
-
   window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
     title.style.transform = `translateY(${scrollPos * 0.3}px)`;
   });
+
+  const components = document.querySelectorAll('.component');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  components.forEach(component => {
+    observer.observe(component);
+  });
 </script>
 
 </body>
-</html>
+    </html>
