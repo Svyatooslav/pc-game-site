@@ -54,6 +54,15 @@
       user-select: none;
     }
 
+    h1:focus {
+      outline: none;
+    }
+
+    h1:focus-visible {
+      outline: 2px solid var(--accent-start);
+      outline-offset: 2px;
+    }
+
     main {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -67,9 +76,7 @@
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 8px var(--shadow-color);
-      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
-                  box-shadow 0.3s ease, 
-                  opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -117,14 +124,13 @@
       .component {
         padding: 15px;
         min-height: 80px;
-        transition: transform 0.8s ease, box-shadow 0.3s ease, opacity 0.8s ease;
       }
     }
   </style>
 </head>
 <body>
 
-<h1 id="pageTitle" tabindex="0" role="button" aria-label="Reload page by clicking the title">My gaming computer</h1>
+<h1 id="pageTitle" tabindex="0" role="button" aria-label="Reload page">My gaming computer</h1>
 
 <main>
   <section class="component" role="region" aria-label="Video Card">
@@ -175,45 +181,32 @@
 
 <script>
   const title = document.getElementById('pageTitle');
-
-  let ticking = false;
   window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        const scrollPos = window.scrollY;
-        title.style.transform = `translateY(${scrollPos * 0.3}px)`;
-        ticking = false;
-      });
-      ticking = true;
-    }
+    const scrollPos = window.scrollY;
+    title.style.transform = `translateY(${scrollPos * 0.3}px)`;
   });
 
   const components = document.querySelectorAll('.component');
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 300);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
     });
+  }, {
+    threshold: 0.1
+  });
 
-    components.forEach(component => observer.observe(component));
-  } else {
-    components.forEach(component => component.classList.add('visible'));
-  }
+  components.forEach(component => {
+    observer.observe(component);
+  });
 
   title.addEventListener('click', () => {
     location.reload();
   });
 
-  title.addEventListener('keydown', e => {
+  title.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       location.reload();
