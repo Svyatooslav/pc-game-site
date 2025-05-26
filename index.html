@@ -15,6 +15,10 @@
       --accent-end: #fd7e14;
       --card-bg: #121212;
       --shadow-color: rgba(0, 0, 0, 0.3);
+      --browser-panel-bg: #f5f5f7;
+      --browser-panel-text: #000000;
+      --browser-address-bar-bg: #e0e0e0;
+      --browser-address-bar-text: #333333;
     }
 
     html, body {
@@ -45,8 +49,8 @@
     }
 
     .scroll-container {
-      height: 100%;
-      margin-top: 0;
+      height: calc(100% - 44px);
+      margin-top: 44px;
       box-sizing: border-box;
     }
 
@@ -65,6 +69,110 @@
       outline: none !important;
       box-shadow: none !important;
       border-color: transparent !important;
+    }
+
+    .browser-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 44px;
+      background-color: var(--browser-panel-bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      color: var(--browser-panel-text);
+      font-size: 14px;
+    }
+
+    .browser-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .browser-button {
+      background-color: transparent;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--browser-panel-text);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .browser-button:hover {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .address-bar {
+      flex-grow: 1;
+      background-color: var(--browser-address-bar-bg);
+      border-radius: 8px;
+      padding: 8px 15px;
+      margin: 0 10px;
+      color: var(--browser-address-bar-text);
+      font-size: 14px;
+      text-align: center;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 400px;
+    }
+
+    .menu-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      width: 28px;
+      height: 18px;
+      cursor: pointer;
+      z-index: 9999;
+      background-color: transparent;
+      border: none;
+      box-sizing: content-box;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      margin-left: 10px;
+    }
+
+    .menu-icon:hover {
+        opacity: 0.6;
+    }
+
+    .menu-icon span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: var(--browser-panel-text);
+      border-radius: 1.5px;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-icon span:first-child {
+      top: 0;
+    }
+
+    .menu-icon span:last-child {
+      bottom: 0;
+    }
+
+    .menu-icon.active span:first-child {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .menu-icon.active span:last-child {
+      transform: translateY(-7.5px) rotate(-45deg);
     }
 
     h1 {
@@ -179,6 +287,9 @@
       .component {
         padding: 15px;
       }
+      .address-bar {
+        max-width: 250px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -193,10 +304,50 @@
       .component {
         padding: 10px;
       }
+      .browser-panel {
+        padding: 0 5px;
+      }
+      .browser-controls {
+        gap: 5px;
+      }
+      .menu-icon {
+        width: 24px;
+        height: 16px;
+        margin-left: 5px;
+      }
+      .menu-icon span {
+        height: 2.5px;
+      }
+      .menu-icon.active span:first-child {
+        transform: translateY(6.75px) rotate(45deg);
+      }
+      .menu-icon.active span:last-child {
+        transform: translateY(-6.75px) rotate(-45deg);
+      }
+      .address-bar {
+        font-size: 12px;
+        padding: 6px 10px;
+        margin: 0 5px;
+      }
     }
   </style>
 </head>
 <body>
+
+<div class="browser-panel">
+  <div class="browser-controls">
+    <button class="browser-button">&lt;</button>
+    <button class="browser-button">&gt;</button>
+  </div>
+  <div class="address-bar">svyatooslav.github.io/</div>
+  <div class="browser-controls">
+    <button class="browser-button">+</button>
+    <div class="menu-icon" id="menuIcon">
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
 
 <div class="scroll-container" data-simplebar>
   <h1 id="pageTitle">My Gaming Computer</h1>
@@ -244,6 +395,7 @@
 <script src="https://unpkg.com/simplebar/dist/simplebar.min.js"></script>
 <script>
   const title = document.getElementById('pageTitle');
+  const menuIcon = document.getElementById('menuIcon');
 
   document.addEventListener('DOMContentLoaded', () => {
     new SimpleBar(document.querySelector('[data-simplebar]'));
@@ -257,6 +409,10 @@
         title.style.transform = `translateY(${scrollPos * 0.3}px)`;
       });
   }
+
+  menuIcon.addEventListener('click', () => {
+    menuIcon.classList.toggle('active');
+  });
 
   title.addEventListener('click', () => {
     location.reload();
