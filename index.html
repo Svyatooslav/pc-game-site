@@ -17,11 +17,11 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #000000;
+        --bg: #0b0f1a;
         --text: #ffffff;
         --accent-start: #0a84ff;
         --accent-end: #0071e3;
-        --card-bg: #121212;
+        --card-bg: #1a1a1a;
         --shadow-color: rgba(0, 0, 0, 0.15);
         --border-color: #0a84ff;
       }
@@ -84,6 +84,37 @@
       flex-direction: column;
       justify-content: center;
       min-height: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .component::before,
+    .component::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, #0071e3, #a259ff, #fc5c7d, #fd7e14);
+      background-size: 200% 200%;
+      animation: gradientApple 6s ease infinite;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+      filter: drop-shadow(0 0 8px #a259ff) drop-shadow(0 0 12px #fc5c7d);
+      pointer-events: none;
+    }
+
+    .component::before {
+      left: 0;
+    }
+
+    .component::after {
+      right: 0;
+    }
+
+    .component:hover::before,
+    .component:hover::after {
+      opacity: 1;
     }
 
     .component:hover {
