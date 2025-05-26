@@ -86,6 +86,24 @@
       transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
     }
 
+    .header-line {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 1px;
+        background-color: #000;
+        z-index: 1001;
+    }
+
+    .header-line:nth-of-type(1) {
+        top: 2px;
+    }
+
+    .header-line:nth-of-type(2) {
+        top: 4px;
+    }
+
     .apple-menu-icon {
       display: block;
       position: absolute;
@@ -240,6 +258,8 @@
 <body>
 
 <header>
+  <div class="header-line"></div>
+  <div class="header-line"></div>
   <div class="apple-menu-icon" id="appleMenuIcon">
     <span></span>
     <span></span>
@@ -307,7 +327,7 @@
       });
   }
 
-  appleMenuIcon.addEventListener('click', () => {
+  appleMenu-icon.addEventListener('click', () => {
     appleMenuIcon.classList.toggle('active');
   });
 
