@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Gaming PC</title>
+  <link rel="stylesheet" href="https://unpkg.com/simplebar/dist/simplebar.min.css" />
   <style>
     :root {
       --bg: #000000;
@@ -18,35 +19,37 @@
       --header-text: #1d1d1f;
     }
 
-    body::-webkit-scrollbar {
-      width: 12px;
-      background-color: #0d0d0d;
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
     }
 
-    body::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-
-    body::-webkit-scrollbar-thumb {
-      background-color: #888;
+    .simplebar-scrollbar:before {
+      background-color: #888 !important;
       border-radius: 6px;
-      border: 3px solid #0d0d0d;
     }
-
-    body::-webkit-scrollbar-thumb:hover {
-      background-color: #aaa;
+    .simplebar-track.simplebar-vertical {
+        background-color: #0d0d0d;
+    }
+    .simplebar-scrollbar {
+        border: none;
     }
 
     body {
-      margin: 0;
-      padding-top: 60px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       background-color: var(--bg);
       color: var(--text);
       scroll-behavior: smooth;
       transition: background-color 0.4s, color 0.4s;
-      overflow-x: hidden;
+    }
+
+    .scroll-container {
+      height: calc(100% - 48px);
+      margin-top: 48px;
+      box-sizing: border-box;
     }
 
     *:focus,
@@ -139,6 +142,7 @@
       text-align: center;
       cursor: pointer;
       user-select: none;
+      padding-top: 20px;
     }
 
     main {
@@ -147,6 +151,7 @@
       gap: 20px;
       max-width: 960px;
       margin: 0 auto;
+      padding-bottom: 20px;
     }
 
     .component {
@@ -227,7 +232,7 @@
     @media (max-width: 600px) {
       h1 { font-size: 2rem; }
       .component { padding: 15px; min-height: 80px; }
-      body { padding-top: 50px; }
+      .scroll-container { height: calc(100% - 44px); margin-top: 44px; }
       header { height: 44px; }
     }
   </style>
@@ -241,55 +246,66 @@
   </div>
 </header>
 
-<h1 id="pageTitle">My Gaming Computer</h1>
+<div class="scroll-container" data-simplebar>
+  <h1 id="pageTitle">My Gaming Computer</h1>
 
-<main>
-  <section class="component" role="region" aria-label="Video Card">
-    <div class="title">Video Card</div>
-    ASUS GeForce RTX 4060 Ti Dual EVO OC Edition
-  </section>
-  <section class="component" role="region" aria-label="CPU">
-    <div class="title">CPU</div>
-    Intel® Core™ i5-12400F
-  </section>
-  <section class="component" role="region" aria-label="Motherboard">
-    <div class="title">Motherboard</div>
-    ASUS PRIME B760M-K D4
-  </section>
-  <section class="component" role="region" aria-label="Cooling">
-    <div class="title">Cooling</div>
-    DeepCool AG400 BK ARGB
-  </section>
-  <section class="component" role="region" aria-label="RAM">
-    <div class="title">RAM</div>
-    32GB Kingston FURY Renegade RGB
-  </section>
-  <section class="component" role="region" aria-label="SSD Drive">
-    <div class="title">SSD Drive</div>
-    2TB Samsung 990 PRO [7450MB/s, Gen4]
-  </section>
-  <section class="component" role="region" aria-label="Power Unit">
-    <div class="title">Power Unit</div>
-    750W DeepCool PN750M
-  </section>
-  <section class="component" role="region" aria-label="Frame">
-    <div class="title">Frame</div>
-    LIAN LI O11 Vision
-  </section>
-  <section class="component" role="region" aria-label="Fans">
-    <div class="title">Fans</div>
-    LIAN LI UNI FAN TL LCD 140
-  </section>
-</main>
+  <main>
+    <section class="component" role="region" aria-label="Video Card">
+      <div class="title">Video Card</div>
+      ASUS GeForce RTX 4060 Ti Dual EVO OC Edition
+    </section>
+    <section class="component" role="region" aria-label="CPU">
+      <div class="title">CPU</div>
+      Intel® Core™ i5-12400F
+    </section>
+    <section class="component" role="region" aria-label="Motherboard">
+      <div class="title">Motherboard</div>
+      ASUS PRIME B760M-K D4
+    </section>
+    <section class="component" role="region" aria-label="Cooling">
+      <div class="title">Cooling</div>
+      DeepCool AG400 BK ARGB
+    </section>
+    <section class="component" role="region" aria-label="RAM">
+      <div class="title">RAM</div>
+      32GB Kingston FURY Renegade RGB
+    </section>
+    <section class="component" role="region" aria-label="SSD Drive">
+      <div class="title">SSD Drive</div>
+      2TB Samsung 990 PRO [7450MB/s, Gen4]
+    </section>
+    <section class="component" role="region" aria-label="Power Unit">
+      <div class="title">Power Unit</div>
+      750W DeepCool PN750M
+    </section>
+    <section class="component" role="region" aria-label="Frame">
+      <div class="title">Frame</div>
+      LIAN LI O11 Vision
+    </section>
+    <section class="component" role="region" aria-label="Fans">
+      <div class="title">Fans</div>
+      LIAN LI UNI FAN TL LCD 140
+    </section>
+  </main>
+</div>
 
+<script src="https://unpkg.com/simplebar/dist/simplebar.min.js"></script>
 <script>
   const title = document.getElementById('pageTitle');
   const appleMenuIcon = document.getElementById('appleMenuIcon');
 
-  window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-    title.style.transform = `translateY(${scrollPos * 0.3}px)`;
+  document.addEventListener('DOMContentLoaded', () => {
+    new SimpleBar(document.querySelector('[data-simplebar]'));
   });
+
+  const scrollContainer = document.querySelector('.simplebar-content-wrapper');
+
+  if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', () => {
+        const scrollPos = scrollContainer.scrollTop;
+        title.style.transform = `translateY(${scrollPos * 0.3}px)`;
+      });
+  }
 
   appleMenuIcon.addEventListener('click', () => {
     appleMenuIcon.classList.toggle('active');
