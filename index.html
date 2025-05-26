@@ -28,8 +28,21 @@
       overflow-x: hidden;
     }
 
-    *:focus {
+    *:focus,
+    *:focus-visible {
       outline: none !important;
+      box-shadow: none !important;
+      border-color: transparent !important;
+    }
+
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus,
+    a:focus {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: transparent !important;
     }
 
     h1 {
