@@ -14,7 +14,7 @@
       --accent-end: #fd7e14;
       --card-bg: #121212;
       --shadow-color: rgba(0, 0, 0, 0.3);
-      --header-bg: rgba(255, 255, 255, 0.8);
+      --header-bg: rgb(255, 255, 255);
       --header-text: #1d1d1f;
     }
 
@@ -58,21 +58,23 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      padding: 0 40px;
+      padding: 0;
       box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
       z-index: 1000;
       transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
     }
 
     .apple-menu-icon {
+      display: block;
+      position: absolute;
+      right: 20px;
+      top: 18px;
       width: 20px;
       height: 12px;
-      display: flex;
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-      z-index: 1001;
-      position: relative;
+      z-index: 9999;
       background-color: transparent;
       border: none;
       box-sizing: content-box;
