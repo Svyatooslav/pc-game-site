@@ -223,14 +223,12 @@
       content: '';
       position: absolute;
       inset: 0;
-      padding: 2px;
+      padding: 0;
       border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent-start), var(--accent-mid), var(--accent-alt), var(--accent-end));
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
+      background: none;
+      -webkit-mask: none;
+      -webkit-mask-composite: none;
+              mask-composite: none;
       pointer-events: none;
       z-index: -1;
     }
