@@ -89,12 +89,12 @@
     }
 
     .apple-menu-icon {
-      display: block;
-      position: relative;
-      width: 24px;
-      height: 16px;
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      width: 24px;
+      height: 18px;
       cursor: pointer;
       z-index: 9999;
       background-color: transparent;
@@ -114,7 +114,7 @@
       height: 2.5px;
       background-color: var(--apple-header-text);
       border-radius: 1.25px;
-      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease, background-color 0.3s ease;
       position: absolute;
       left: 0;
     }
@@ -123,16 +123,25 @@
       top: 0;
     }
 
+    .apple-menu-icon span:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
     .apple-menu-icon span:last-child {
       bottom: 0;
     }
 
     .apple-menu-icon.active span:first-child {
-      transform: translateY(6.75px) rotate(45deg);
+      transform: translateY(7.75px) rotate(45deg);
+    }
+
+    .apple-menu-icon.active span:nth-child(2) {
+      opacity: 0;
     }
 
     .apple-menu-icon.active span:last-child {
-      transform: translateY(-6.75px) rotate(-45deg);
+      transform: translateY(-7.75px) rotate(-45deg);
     }
 
     h1 {
@@ -245,6 +254,7 @@
 
 <header>
   <div class="apple-menu-icon" id="appleMenuIcon">
+    <span></span>
     <span></span>
     <span></span>
   </div>
