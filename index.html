@@ -53,7 +53,13 @@
       will-change: transform;
       text-align: center;
       cursor: pointer;
+      outline: none;
       user-select: none;
+    }
+
+    h1:focus,
+    h1:focus-visible {
+      outline: none;
     }
 
     main {
@@ -93,9 +99,9 @@
       background-size: 200% 200%;
       animation: gradientApple 6s ease infinite;
       opacity: 0.6;
+      transition: opacity 0.3s ease;
       filter: drop-shadow(0 0 8px #a259ff) drop-shadow(0 0 12px #fc5c7d);
       pointer-events: none;
-      transition: opacity 0.3s ease;
     }
 
     .component::before {
@@ -163,9 +169,48 @@
         min-height: 80px;
       }
     }
+
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .bar {
+      width: 100%;
+      height: 2px;
+      background-color: var(--text);
+      margin: 3px 0;
+      border-radius: 1px;
+      transition: all 0.4s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+      transform: rotate(45deg);
+      position: absolute;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+      transform: rotate(-45deg);
+      position: absolute;
+    }
   </style>
 </head>
 <body>
+
+<div class="hamburger" id="hamburger">
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div>
 
 <h1 id="pageTitle">My Gaming Computer</h1>
 
@@ -218,10 +263,17 @@
 
 <script>
   const title = document.getElementById('pageTitle');
+  const hamburger = document.getElementById('hamburger');
+
   window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
     title.style.transform = `translateY(${scrollPos * 0.3}px)`;
   });
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+  });
+
   title.addEventListener('click', () => {
     location.reload();
   });
