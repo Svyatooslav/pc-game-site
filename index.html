@@ -91,6 +91,7 @@
       border-radius: 1.5px;
       position: absolute;
       left: 0;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
 
     .menu-icon span:first-child {
@@ -99,6 +100,14 @@
 
     .menu-icon span:last-child {
       bottom: 0;
+    }
+
+    .menu-icon.active span:first-child {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .menu-icon.active span:last-child {
+      transform: translateY(-7.5px) rotate(-45deg);
     }
 
     .scroll-container {
@@ -243,6 +252,12 @@
       }
       .menu-icon span {
         height: 2.5px;
+      }
+      .menu-icon.active span:first-child {
+        transform: translateY(6.75px) rotate(45deg);
+      }
+      .menu-icon.active span:last-child {
+        transform: translateY(-6.75px) rotate(-45deg);
       }
     }
   </style>
