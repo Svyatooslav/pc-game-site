@@ -94,7 +94,7 @@
       justify-content: space-between;
       position: relative;
       width: 24px;
-      height: 18px;
+      height: 16px;
       cursor: pointer;
       z-index: 9999;
       background-color: transparent;
@@ -114,7 +114,7 @@
       height: 2.5px;
       background-color: var(--apple-header-text);
       border-radius: 1.25px;
-      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
       position: absolute;
       left: 0;
     }
@@ -123,25 +123,16 @@
       top: 0;
     }
 
-    .apple-menu-icon span:nth-child(2) {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
     .apple-menu-icon span:last-child {
       bottom: 0;
     }
 
     .apple-menu-icon.active span:first-child {
-      transform: translateY(7.75px) rotate(45deg);
-    }
-
-    .apple-menu-icon.active span:nth-child(2) {
-      opacity: 0;
+      transform: translateY(6.75px) rotate(45deg);
     }
 
     .apple-menu-icon.active span:last-child {
-      transform: translateY(-7.75px) rotate(-45deg);
+      transform: translateY(-6.75px) rotate(-45deg);
     }
 
     h1 {
@@ -244,9 +235,45 @@
       100% { background-position: 0% 50%; }
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      .component { padding: 15px; min-height: 80px; }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      main {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 0 15px 20px;
+      }
+      .component {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      main {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 0 10px 15px;
+      }
+      .component {
+        padding: 10px;
+      }
+      .apple-menu-icon {
+        width: 20px;
+        height: 14px;
+      }
+      .apple-menu-icon span {
+        height: 2px;
+      }
+      .apple-menu-icon.active span:first-child {
+        transform: translateY(6px) rotate(45deg);
+      }
+      .apple-menu-icon.active span:last-child {
+        transform: translateY(-6px) rotate(-45deg);
+      }
     }
   </style>
 </head>
@@ -254,7 +281,6 @@
 
 <header>
   <div class="apple-menu-icon" id="appleMenuIcon">
-    <span></span>
     <span></span>
     <span></span>
   </div>
