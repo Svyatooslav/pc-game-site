@@ -1,22 +1,24 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Gaming PC</title>
-  <link rel="stylesheet" href="https://unpkg.com/simplebar/dist/simplebar.min.css" />
-  <style>
-    :root {
-      --bg: #000000;
-      --text: #ffffff;
-      --accent-start: #0071e3;
-      --accent-mid: #a259ff;
-      --accent-alt: #fc5c7d;
-      --accent-end: #fd7e14;
-      --card-bg: #121212;
-      --shadow-color: rgba(0, 0, 0, 0.3);
-      --browser-panel-bg: #e0e0e0;
-      --browser-panel-text: #000000;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Gaming PC</title>
+<link rel="stylesheet" href="https://unpkg.com/simplebar/dist/simplebar.min.css" />
+<style>
+:root {
+  --bg: #000000;
+  --text: #ffffff;
+  --accent-start: #0071e3;
+  --accent-mid: #a259ff;
+  --accent-alt: #fc5c7d;
+  --accent-end: #fd7e14;
+  --card-bg: #121212;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --browser-panel-bg: #e0e0e0;
+  --browser-panel-text: #000000;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -221,10 +223,63 @@ main {
   100% { background-position: 0% 50%; }
 }
 
+/* 🔹 Мини-карточка для GPU */
+.gpu-card-popup {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(10px, -50%);
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+  width: 250px;
+  z-index: 3000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.gpu-card-popup img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.gpu-card-popup h4 {
+  margin: 0 0 8px;
+  color: var(--accent-mid);
+  text-align: center;
+}
+
+.gpu-card-popup ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  color: #ccc;
+}
+
+.gpu-card-popup ul li {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.gpu-card-popup ul li::before {
+  content: "•";
+  color: var(--accent-start);
+  margin-right: 6px;
+}
+
+.component:hover .gpu-card-popup {
+  display: flex;
+}
+
+/* Адаптив */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
   main {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
@@ -234,11 +289,7 @@ main {
     padding: 15px;
   }
 }
-
 @media (max-width: 480px) {
-  h1 {
-    font-size: 2rem;
-  }
   main {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -247,26 +298,8 @@ main {
   .component {
     padding: 10px;
   }
-  .browser-panel {
-    height: 50px;
-  }
-  .menu-icon {
-    width: 24px;
-    height: 16px;
-    margin-right: 15px;
-  }
-  .menu-icon span {
-    height: 2.5px;
-  }
-  .menu-icon.active span:first-child {
-    transform: translateY(6.75px) rotate(45deg);
-  }
-  .menu-icon.active span:last-child {
-    transform: translateY(-6.75px) rotate(-45deg);
-  }
 }
-
-  </style>
+</style>
 </head>
 <body>
 <div class="browser-panel">
@@ -278,64 +311,82 @@ main {
 <div class="scroll-container" data-simplebar>
   <h1 id="pageTitle">My Gaming Computer</h1>
   <main>
-    <section class="component" role="region" aria-label="Video Card">
+    <section class="component" role="region" aria-label="Video Card" id="gpuCard">
       <div class="title">Video Card</div>
-      ASUS GeForce RTX 4060 Ti Dual EVO OC Edition
+      ASUS GeForce RTX 4060 DUAL V2 OC Edition
+      <div class="gpu-card-popup">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Nvidia_GeForce_RTX_4060_Ti_Founders_Edition.jpg/320px-Nvidia_GeForce_RTX_4060_Ti_Founders_Edition.jpg" alt="GPU Image">
+        <h4>ASUS RTX 4060 DUAL V2</h4>
+        <ul>
+          <li>8GB GDDR6</li>
+          <li>Boost Clock 2595 MHz</li>
+          <li>1x 8-pin Power</li>
+          <li>Dual Fans Cooling</li>
+        </ul>
+      </div>
     </section>
+
     <section class="component" role="region" aria-label="CPU">
       <div class="title">CPU</div>
       AMD Ryzen™ 7 7800X3D
     </section>
+
     <section class="component" role="region" aria-label="Motherboard">
       <div class="title">Motherboard</div>
       ASUS ROG STRIX X870-F GAMING WIFI
     </section>
+
     <section class="component" role="region" aria-label="Cooling">
       <div class="title">Cooling</div>
       DeepCool AG400 BK ARGB
     </section>
+
     <section class="component" role="region" aria-label="RAM">
       <div class="title">RAM</div>
       Trident Z5 Royal Neo
     </section>
+
     <section class="component" role="region" aria-label="SSD Drive">
       <div class="title">SSD Drive</div>
       2TB Samsung 990 PRO [7450MB/s, Gen4]
     </section>
+
     <section class="component" role="region" aria-label="Power Unit">
       <div class="title">Power Unit</div>
       750W DeepCool PN750M
     </section>
+
     <section class="component" role="region" aria-label="Frame">
       <div class="title">Frame</div>
       O11 VISION COMPACT
     </section>
+
     <section class="component" role="region" aria-label="Fans">
       <div class="title">Fans</div>
       LIAN LI UNI FAN TL LCD 140
     </section>
+
   </main>
 </div>
+
 <script src="https://unpkg.com/simplebar/dist/simplebar.min.js"></script>
 <script>
-  const title = document.getElementById('pageTitle');
-  const menuIcon = document.getElementById('menuIcon');
-  const scrollContainer = document.querySelector('.simplebar-content-wrapper');
+const menuIcon = document.getElementById('menuIcon');
+const title = document.getElementById('pageTitle');
+const scrollContainer = document.querySelector('.simplebar-content-wrapper');
 
-  if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', () => {
-        const scrollPos = scrollContainer.scrollTop;
-        title.style.transform = `translateY(${scrollPos * 0.3}px)`;
-      });
-  }
-
-  menuIcon.addEventListener('click', () => {
-    menuIcon.classList.toggle('active');
+if (scrollContainer) {
+  scrollContainer.addEventListener('scroll', () => {
+    const scrollPos = scrollContainer.scrollTop;
+    title.style.transform = `translateY(${scrollPos * 0.3}px)`;
   });
+}
 
-  title.addEventListener('click', () => {
-    location.reload();
-  });
+menuIcon.addEventListener('click', () => {
+  menuIcon.classList.toggle('active');
+});
+
+title.addEventListener('click', () => location.reload());
 </script>
 </body>
-      </html>
+</html>
