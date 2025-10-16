@@ -157,6 +157,7 @@
       min-height: 100px;
       overflow: hidden;
       z-index: 0;
+      will-change: transform, opacity;
     }
 
     .component::before {
@@ -178,6 +179,11 @@
     .component:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 24px var(--shadow-color);
+    }
+
+    .component:active {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px var(--shadow-color);
     }
 
     .title {
@@ -286,7 +292,7 @@
     </section>
     <section class="component" role="region" aria-label="Motherboard">
       <div class="title">Motherboard</div>
-      ASUS PRIME B760M-K D4
+      ASUS ROG STRIX X870-F GAMING WIFI
     </section>
     <section class="component" role="region" aria-label="Cooling">
       <div class="title">Cooling</div>
@@ -319,10 +325,6 @@
 <script>
   const title = document.getElementById('pageTitle');
   const menuIcon = document.getElementById('menuIcon');
-
-  document.addEventListener('DOMContentLoaded', () => {
-    new SimpleBar(document.querySelector('[data-simplebar]'));
-  });
 
   const scrollContainer = document.querySelector('.simplebar-content-wrapper');
 
