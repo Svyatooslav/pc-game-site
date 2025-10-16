@@ -16,7 +16,8 @@
       --shadow-color: rgba(0, 0, 0, 0.3);
       --browser-panel-bg: #e0e0e0;
       --browser-panel-text: #000000;
-    }html, body {
+    }
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -267,13 +268,16 @@ main {
 
   </style>
 </head>
-<body><div class="browser-panel">
+<body>
+<div class="browser-panel">
   <div class="menu-icon" id="menuIcon">
     <span></span>
     <span></span>
   </div>
-</div><div class="scroll-container" data-simplebar>
-  <h1 id="pageTitle">My Gaming Computer</h1>  <main>
+</div>
+<div class="scroll-container" data-simplebar>
+  <h1 id="pageTitle">My Gaming Computer</h1>
+  <main>
     <section class="component" role="region" aria-label="Video Card">
       <div class="title">Video Card</div>
       ASUS GeForce RTX 4060 Ti Dual EVO OC Edition
@@ -292,7 +296,7 @@ main {
     </section>
     <section class="component" role="region" aria-label="RAM">
       <div class="title">RAM</div>
-      32GB Kingston FURY Renegade RGB
+      Trident Z5 Royal Neo
     </section>
     <section class="component" role="region" aria-label="SSD Drive">
       <div class="title">SSD Drive</div>
@@ -311,10 +315,11 @@ main {
       LIAN LI UNI FAN TL LCD 140
     </section>
   </main>
-</div><script src="https://unpkg.com/simplebar/dist/simplebar.min.js"></script><script>
+</div>
+<script src="https://unpkg.com/simplebar/dist/simplebar.min.js"></script>
+<script>
   const title = document.getElementById('pageTitle');
   const menuIcon = document.getElementById('menuIcon');
-
   const scrollContainer = document.querySelector('.simplebar-content-wrapper');
 
   if (scrollContainer) {
@@ -331,5 +336,6 @@ main {
   title.addEventListener('click', () => {
     location.reload();
   });
-</script></body>
-</html>
+</script>
+</body>
+      </html>
