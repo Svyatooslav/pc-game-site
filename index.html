@@ -198,7 +198,31 @@ main {
   color: var(--accent-end);
 }
 
-/* GPU popup */
+.component:nth-of-type(1) { --order: 1; }
+.component:nth-of-type(2) { --order: 2; }
+.component:nth-of-type(3) { --order: 3; }
+.component:nth-of-type(4) { --order: 4; }
+.component:nth-of-type(5) { --order: 5; }
+.component:nth-of-type(6) { --order: 6; }
+.component:nth-of-type(7) { --order: 7; }
+.component:nth-of-type(8) { --order: 8; }
+.component:nth-of-type(9) { --order: 9; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes gradientApple {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .gpu-card-popup {
   position: absolute;
   top: 50%;
@@ -215,26 +239,21 @@ main {
   align-items: center;
   transition: opacity 0.3s ease;
 }
-
 .gpu-card-popup img {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0;
-  animation: fadeInImg 1s ease forwards;
 }
 .gpu-card-popup img:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
-
 .gpu-card-popup h4 {
   margin: 0 0 8px;
   color: var(--accent-mid);
   text-align: center;
 }
-
 .gpu-card-popup ul {
   padding: 0;
   margin: 0;
@@ -242,41 +261,18 @@ main {
   width: 100%;
   color: #ccc;
 }
-
 .gpu-card-popup ul li {
   font-size: 0.85rem;
   margin-bottom: 4px;
   display: flex;
   align-items: center;
 }
-
 .gpu-card-popup ul li::before {
   content: "•";
   color: var(--accent-start);
   margin-right: 6px;
 }
 
-/* Animations */
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-@keyframes fadeInImg {
-  to { opacity: 1; }
-}
-
-@keyframes gradientApple {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Mobile */
 @media (max-width: 768px) {
   .gpu-card-popup {
     position: relative;
@@ -318,13 +314,11 @@ main {
 <div class="scroll-container" data-simplebar>
   <h1 id="pageTitle">My Gaming Computer</h1>
   <main>
-    <!-- GPU Card -->
     <section class="component" role="region" aria-label="Video Card" id="gpuCard">
       <div class="title">Video Card</div>
       ASUS GeForce RTX 4060 DUAL V2 OC Edition
-
       <div class="gpu-card-popup" id="gpuPopup">
-        <img src="asus-rtx4060.jpg" alt="ASUS RTX 4060 DUAL V2" />
+        <img src="https://i.ibb.co/abcd123/asus-rtx4060.jpg" alt="ASUS RTX 4060 DUAL V2" />
         <h4>ASUS RTX 4060 DUAL V2</h4>
         <ul>
           <li>8GB GDDR6</li>
@@ -335,46 +329,14 @@ main {
       </div>
     </section>
 
-    <section class="component" role="region" aria-label="CPU">
-      <div class="title">CPU</div>
-      AMD Ryzen™ 7 7800X3D
-    </section>
-
-    <section class="component" role="region" aria-label="Motherboard">
-      <div class="title">Motherboard</div>
-      ASUS ROG STRIX X870-F GAMING WIFI
-    </section>
-
-    <section class="component" role="region" aria-label="Cooling">
-      <div class="title">Cooling</div>
-      DeepCool AG400 BK ARGB
-    </section>
-
-    <section class="component" role="region" aria-label="RAM">
-      <div class="title">RAM</div>
-      Trident Z5 Royal Neo
-    </section>
-
-    <section class="component" role="region" aria-label="SSD Drive">
-      <div class="title">SSD Drive</div>
-      2TB Samsung 990 PRO [7450MB/s, Gen4]
-    </section>
-
-    <section class="component" role="region" aria-label="Power Unit">
-      <div class="title">Power Unit</div>
-      750W DeepCool PN750M
-    </section>
-
-    <section class="component" role="region" aria-label="Frame">
-      <div class="title">Frame</div>
-      O11 VISION COMPACT
-    </section>
-
-    <section class="component" role="region" aria-label="Fans">
-      <div class="title">Fans</div>
-      LIAN LI UNI FAN TL LCD 140
-    </section>
-
+    <section class="component"><div class="title">CPU</div>AMD Ryzen™ 7 7800X3D</section>
+    <section class="component"><div class="title">Motherboard</div>ASUS ROG STRIX X870-F GAMING WIFI</section>
+    <section class="component"><div class="title">Cooling</div>DeepCool AG400 BK ARGB</section>
+    <section class="component"><div class="title">RAM</div>Trident Z5 Royal Neo</section>
+    <section class="component"><div class="title">SSD Drive</div>2TB Samsung 990 PRO [7450MB/s, Gen4]</section>
+    <section class="component"><div class="title">Power Unit</div>750W DeepCool PN750M</section>
+    <section class="component"><div class="title">Frame</div>O11 VISION COMPACT</section>
+    <section class="component"><div class="title">Fans</div>LIAN LI UNI FAN TL LCD 140</section>
   </main>
 </div>
 
@@ -399,7 +361,6 @@ menuIcon.addEventListener('click', () => {
 
 title.addEventListener('click', () => location.reload());
 
-// Mobile click toggle
 gpuCard.addEventListener('click', (e) => {
   if(window.innerWidth <= 768){
     gpuPopup.style.display = (gpuPopup.style.display === 'flex') ? 'none' : 'flex';
@@ -407,7 +368,6 @@ gpuCard.addEventListener('click', (e) => {
   e.stopPropagation();
 });
 
-// Close popup on outside click
 document.addEventListener('click', () => {
   if(window.innerWidth <= 768){
     gpuPopup.style.display = 'none';
