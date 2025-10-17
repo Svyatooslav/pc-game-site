@@ -198,32 +198,7 @@ main {
   color: var(--accent-end);
 }
 
-.component:nth-of-type(1) { --order: 1; }
-.component:nth-of-type(2) { --order: 2; }
-.component:nth-of-type(3) { --order: 3; }
-.component:nth-of-type(4) { --order: 4; }
-.component:nth-of-type(5) { --order: 5; }
-.component:nth-of-type(6) { --order: 6; }
-.component:nth-of-type(7) { --order: 7; }
-.component:nth-of-type(8) { --order: 8; }
-.component:nth-of-type(9) { --order: 9; }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-@keyframes gradientApple {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* 🔹 Мини-карточка GPU (рядом с блоком на десктопе, под блоком на мобильных) */
+/* GPU popup */
 .gpu-card-popup {
   position: absolute;
   top: 50%;
@@ -245,6 +220,13 @@ main {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeInImg 1s ease forwards;
+}
+.gpu-card-popup img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 .gpu-card-popup h4 {
@@ -274,7 +256,27 @@ main {
   margin-right: 6px;
 }
 
-/* Мобильная адаптация */
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeInImg {
+  to { opacity: 1; }
+}
+
+@keyframes gradientApple {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .gpu-card-popup {
     position: relative;
@@ -316,11 +318,13 @@ main {
 <div class="scroll-container" data-simplebar>
   <h1 id="pageTitle">My Gaming Computer</h1>
   <main>
+    <!-- GPU Card -->
     <section class="component" role="region" aria-label="Video Card" id="gpuCard">
       <div class="title">Video Card</div>
       ASUS GeForce RTX 4060 DUAL V2 OC Edition
+
       <div class="gpu-card-popup" id="gpuPopup">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Nvidia_GeForce_RTX_4060_Ti_Founders_Edition.jpg/320px-Nvidia_GeForce_RTX_4060_Ti_Founders_Edition.jpg" alt="GPU Image">
+        <img src="asus-rtx4060.jpg" alt="ASUS RTX 4060 DUAL V2" />
         <h4>ASUS RTX 4060 DUAL V2</h4>
         <ul>
           <li>8GB GDDR6</li>
@@ -395,16 +399,15 @@ menuIcon.addEventListener('click', () => {
 
 title.addEventListener('click', () => location.reload());
 
-// ✅ Мобильный клик для GPU
+// Mobile click toggle
 gpuCard.addEventListener('click', (e) => {
-  // На мобильных toggle карточку
   if(window.innerWidth <= 768){
     gpuPopup.style.display = (gpuPopup.style.display === 'flex') ? 'none' : 'flex';
   }
   e.stopPropagation();
 });
 
-// Закрытие карточки при клике вне
+// Close popup on outside click
 document.addEventListener('click', () => {
   if(window.innerWidth <= 768){
     gpuPopup.style.display = 'none';
