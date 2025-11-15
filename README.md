@@ -1,1 +1,1 @@
-# Rig & Console
+# Gaming Desk Setup
