@@ -1,290 +1,1189 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#000">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
 <title>GameChat — Your gaming ecosystem</title>
+
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
+
 html{scroll-behavior:smooth}
-body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif}
-button,input{font:inherit}
-a{text-decoration:none;color:inherit}
-.app{overflow:hidden;background:#000}
-.nav{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,6vw);position:sticky;top:0;z-index:20;background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(24px);border-bottom:1px solid rgba(255,255,255,.08)}
-.brand{font-size:19px;font-weight:700;letter-spacing:-.04em}.brand b{color:#777}
-.navlinks{display:flex;align-items:center;gap:30px;font-size:13px;color:#b5b5ba}
-.navlinks a:hover{color:#fff}
-.navbutton{border:0;background:#fff;color:#000;border-radius:999px;padding:7px 14px;font-size:12px;font-weight:600}
 
-.hero{min-height:900px;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px 140px;position:relative;background:radial-gradient(circle at 50% 42%,#252525 0,#090909 35%,#000 70%)}
-.hero:before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,255,255,.12) 22%,transparent 65%);opacity:.08;filter:blur(18px)}
-.hero-content{position:relative;z-index:1;max-width:1100px}
-.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#86868b;font-weight:700;margin-bottom:24px}
-.hero h1{font-size:clamp(64px,10vw,148px);line-height:.88;letter-spacing:-.085em;margin:0;font-weight:700}
-.gradient{background:linear-gradient(100deg,#fff 15%,#aaa 50%,#fff 85%);-webkit-background-clip:text;color:transparent}
-.hero p{max-width:620px;margin:35px auto 0;color:#a1a1a6;font-size:20px;line-height:1.5}
-.ctas{display:flex;justify-content:center;gap:12px;margin-top:34px;flex-wrap:wrap}
-.primary,.secondary{padding:13px 21px;border-radius:999px;font-size:14px;font-weight:600}
-.primary{background:#fff;color:#000}.secondary{border:1px solid #444;color:#fff}
-
-.setup-hero{min-height:760px;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px;position:relative;background:linear-gradient(#000,#080808)}
-.setup-art{position:absolute;width:min(900px,90vw);height:430px;bottom:0;border-radius:50% 50% 8% 8%;background:radial-gradient(ellipse at 50% 25%,#555,#171717 38%,#050505 70%);filter:blur(.2px);box-shadow:0 -40px 130px rgba(255,255,255,.08)}
-.setup-content{position:relative;z-index:2;align-self:flex-start;padding-top:80px}
-.setup-content h2{font-size:clamp(48px,7vw,88px);letter-spacing:-.07em;margin:0}
-.setup-content p{font-size:20px;color:#999;max-width:620px;margin:20px auto}
-
-.section{max-width:1400px;margin:auto;padding:150px 6%}
-.section-label{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#86868b;font-weight:700;margin-bottom:18px}
-.section-title{font-size:clamp(48px,7vw,86px);letter-spacing:-.075em;line-height:.95;margin:0 0 60px}
-.section-title span{color:#777}
-
-.specgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.card{min-height:190px;padding:30px;border-radius:30px;background:linear-gradient(145deg,#181818,#0d0d0d);border:1px solid #252525;display:flex;flex-direction:column;justify-content:space-between;transition:.35s}
-.card:hover{transform:translateY(-4px);border-color:#444}
-.card .icon{font-size:27px;margin-bottom:25px}
-.card small{color:#777;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
-.card strong{font-size:23px;line-height:1.15;letter-spacing:-.035em}
-
-.performance{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
-.performance-card{border-radius:34px;min-height:520px;padding:42px;background:linear-gradient(145deg,#151515,#070707);border:1px solid #242424;display:flex;flex-direction:column;justify-content:space-between}
-.performance-card h3{font-size:52px;letter-spacing:-.06em;margin:0}
-.performance-card p{color:#888;font-size:17px;line-height:1.5;max-width:500px}
-.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat{padding:20px;border-radius:22px;background:#111;border:1px solid #292929}
-.stat b{display:block;font-size:29px;letter-spacing:-.04em}.stat span{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.1em}
-
-.games-section{background:#f5f5f7;color:#111;padding-left:0;padding-right:0}
-.games-inner{max-width:1400px;margin:auto;padding:0 6%}
-.games-section .section-label{color:#777}
-.games-section .section-title span{color:#999}
-.gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.gamecard{min-height:600px;border-radius:34px;overflow:hidden;position:relative;background:#111;color:#fff}
-.gamevisual{position:absolute;inset:0;background:radial-gradient(circle at 55% 35%,#555,#171717 40%,#050505 75%);transition:.5s}
-.gamecard:nth-child(2) .gamevisual{background:radial-gradient(circle at 50% 35%,#52615a,#17201c 42%,#060807 76%)}
-.gamecard:nth-child(3) .gamevisual{background:radial-gradient(circle at 50% 35%,#6a604d,#211d16 42%,#070604 76%)}
-.gamecard:nth-child(4) .gamevisual{background:radial-gradient(circle at 50% 35%,#76513c,#24150e 42%,#070403 76%)}
-.gamecard:hover .gamevisual{transform:scale(1.05)}
-.gameinfo{position:absolute;inset:auto 0 0;padding:38px;background:linear-gradient(transparent,rgba(0,0,0,.92) 55%)}
-.gameinfo small{color:#aaa;text-transform:uppercase;letter-spacing:.13em}.gameinfo h3{font-size:42px;letter-spacing:-.055em;margin:8px 0}.gameinfo p{color:#aaa;margin:0}
-
-.chat-section{max-width:1400px;margin:auto;padding:160px 6%;display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}
-.chat-copy h2{font-size:clamp(58px,7vw,94px);letter-spacing:-.075em;line-height:.92;margin:0}
-.chat-copy p{color:#888;font-size:19px;line-height:1.5;max-width:480px}
-.chatbox{min-height:570px;border-radius:38px;padding:22px;background:linear-gradient(145deg,#171717,#090909);border:1px solid #292929;display:flex;flex-direction:column;box-shadow:0 30px 100px rgba(255,255,255,.04)}
-.messages{flex:1;display:flex;flex-direction:column;gap:12px;overflow:auto}
-.bubble{max-width:78%;padding:15px 18px;border-radius:20px;line-height:1.45;font-size:15px}
-.ai{background:#222;align-self:flex-start}.user{background:#fff;color:#000;align-self:flex-end}
-.composer{display:flex;gap:10px;margin-top:18px}.composer input{flex:1;border:1px solid #333;background:#111;color:#fff;border-radius:18px;padding:15px 17px;outline:none}.composer input:focus{border-color:#777}
-.send{width:50px;border:0;border-radius:18px;background:#fff;color:#000;font-size:21px}
-
-.footer{text-align:center;padding:80px 20px;color:#666;border-top:1px solid #181818;font-size:13px}
-
-@media(max-width:800px){
-.navlinks a{display:none}.hero{min-height:760px}.hero h1{font-size:64px}.hero p{font-size:17px}
-.setup-hero{min-height:620px}.setup-content{padding-top:20px}
-.specgrid,.performance,.gamegrid,.chat-section{grid-template-columns:1fr}
-.section{padding:100px 5%}.games-inner{padding:0 5%}
-.gamecard{min-height:500px}.chat-section{gap:45px}.chatbox{min-height:500px}
-.statrow{grid-template-columns:1fr 1fr}.nav{padding:0 5%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;
+  background:#000;
+  color:#f5f5f7;
+  overflow-x:hidden;
 }
 
-/* Android touch / app-shell enhancements */
-html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;overscroll-behavior-x:none}
-body{padding-bottom:env(safe-area-inset-bottom)}
-a,button{touch-action:manipulation}
-button,.navbutton,.primary,.secondary{min-height:44px}
-@media(max-width:750px){
-  body{overflow-x:hidden}
-  .nav{height:64px;padding-top:env(safe-area-inset-top);box-sizing:content-box}
-  .navlinks{gap:8px}
-  .navlinks a[href="#setup"],.navlinks a[href="#performance"],.navlinks a[href="#games"]{display:none}
-  .navlinks a[href="#chat"]{display:block;font-size:13px}
-  .navbutton{display:block!important;padding:10px 14px!important}
-  .hero{min-height:calc(100svh - 64px);padding:90px 22px 70px}
-  .hero h1{font-size:clamp(52px,16vw,76px);line-height:.9}
-  .hero p{font-size:17px;line-height:1.45}
-  .ctas{gap:10px}.primary,.secondary{padding:13px 17px}
-  .section{padding:90px 20px}
-  .section-title{font-size:clamp(44px,13vw,64px);margin-bottom:38px}
-  .setup-hero{min-height:600px;padding:80px 20px}
-  .setup-content h2{font-size:clamp(48px,14vw,70px)}
-  .setup-content p{font-size:17px}
-  .specgrid,.performance,.gamegrid,.chat-section{grid-template-columns:1fr}
-  .card{min-height:165px;padding:25px;border-radius:25px}
-  .card strong{font-size:20px}
-  .performance-card{min-height:360px;padding:30px;border-radius:28px}
-  .performance-card h3{font-size:43px}
-  .gamecard{min-height:470px;border-radius:28px}
-  .gameinfo{padding:28px}
-  .gameinfo h3{font-size:34px}
-  .chat-section{padding:90px 20px;gap:35px}
-  .chatbox{min-height:calc(100svh - 150px);border-radius:28px;padding:16px}
-  .composer{padding-bottom:max(4px,env(safe-area-inset-bottom))}
-  .composer input{font-size:16px;min-height:48px}
-  .send{min-width:50px;min-height:48px}
+body::selection{
+  background:rgba(120,95,255,.45);
+  color:#fff;
 }
-@media(pointer:coarse){
-  .card:hover,.gamecard:hover,.performance-card:hover{transform:none}
-  .navlinks a,.primary,.secondary,.navbutton,.send{transition:transform .15s ease,opacity .15s ease}
-  .navlinks a:active,.primary:active,.secondary:active,.navbutton:active,.send:active{transform:scale(.96);opacity:.82}
+
+a{
+  color:inherit;
+  text-decoration:none;
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.card,.gamecard,.performance-card{transition:none!important}}
-</style>
-</head>
 
-<body>
-<div class="app">
+button,input{
+  font:inherit;
+}
 
-<nav class="nav">
-<div class="brand">GameChat<b>·</b></div>
-<div class="navlinks">
-<a href="#setup">Setup</a><a href="#performance">Performance</a><a href="#games">Games</a><a href="#chat">AI Chat</a>
-<a class="navbutton" href="#chat">Open Chat</a>
-</div>
-</nav>
+/* NAV */
 
-<section class="hero">
-<div class="hero-content">
-<div class="kicker">Personal gaming ecosystem</div>
-<h1>Your games.<br><span class="gradient">Your setup.</span><br>Your world.</h1>
-<p>Everything about your gaming setup, library and performance — brought together in one beautiful place.</p>
-<div class="ctas"><a class="primary" href="#setup">Explore my setup</a><a class="secondary" href="#games">Explore games</a></div>
-</div>
-</section>
+.nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  background:rgba(0,0,0,.62);
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:background .4s ease,border-color .4s ease,box-shadow .4s ease;
+}
 
-<section class="setup-hero" id="setup">
-<div class="setup-art"></div>
-<div class="setup-content">
-<div class="kicker">The setup</div>
-<h2>Built for gaming.</h2>
-<p>RTX 5070. Ryzen 7 7800X3D. 1000 watts. One seriously capable machine.</p>
-</div>
-</section>
+.nav:hover{
+  background:rgba(8,8,10,.78);
+  border-color:rgba(255,255,255,.13);
+  box-shadow:0 10px 40px rgba(0,0,0,.18);
+}
 
-<section class="section">
-<div class="section-label">Hardware</div>
-<h2 class="section-title">Every part.<br><span>Exactly where it belongs.</span></h2>
+.brand{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:-.7px;
+  transition:transform .3s ease;
+}
 
-<div class="specgrid">
-<article class="card"><div class="icon">◈</div><small>Graphics</small><strong>ASUS Dual GeForce RTX™ 5070<br>12GB GDDR7 OC Edition</strong></article>
-<article class="card"><div class="icon">◉</div><small>Processor</small><strong>AMD Ryzen™ 7 7800X3D</strong></article>
-<article class="card"><div class="icon">⌁</div><small>Motherboard</small><strong>ASUS ROG STRIX X870-F GAMING WIFI</strong></article>
-<article class="card"><div class="icon">◌</div><small>Cooling</small><strong>DeepCool AG400 BK ARGB</strong></article>
-<article class="card"><div class="icon">✦</div><small>Memory</small><strong>G.Skill Trident Z5 Royal Neo</strong></article>
-<article class="card"><div class="icon">▣</div><small>Storage</small><strong>Samsung 9100 PRO</strong></article>
-<article class="card"><div class="icon">ϟ</div><small>Power</small><strong>LIAN LI EDGE 1000W</strong></article>
-<article class="card"><div class="icon">□</div><small>Chassis</small><strong>Lian Li O11 Vision Compact Black</strong></article>
-<article class="card"><div class="icon">≋</div><small>Fans</small><strong>LIAN LI UNI FAN TL LCD 120</strong></article>
-<article class="card"><div class="icon">⌘</div><small>Operating system</small><strong>Windows 11 Pro</strong></article>
-</div>
-</section>
+.brand:hover{
+  transform:scale(1.02);
+}
 
-<section class="section" id="performance">
-<div class="section-label">Performance</div>
-<h2 class="section-title">Made to play.<br><span>Made to stay fast.</span></h2>
+.brand b{
+  color:#7c5cff;
+  text-shadow:0 0 20px rgba(124,92,255,.7);
+}
 
-<div class="performance">
-<article class="performance-card">
-<div><div class="kicker">Gaming machine</div><h3>RTX 5070<br>× 7800X3D</h3><p>A balanced high-performance combination focused on high FPS, low latency and smooth competitive gaming.</p></div>
-<div class="statrow"><div class="stat"><b>12 GB</b><span>GDDR7</span></div><div class="stat"><b>180+</b><span>Hz display ready</span></div><div class="stat"><b>1000 W</b><span>Power</span></div></div>
-</article>
+.navlinks{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  font-size:13px;
+  color:#b8b8bd;
+}
 
-<article class="performance-card">
-<div><div class="kicker">My focus</div><h3>Low latency.</h3><p>NVIDIA Reflex, high refresh rate gaming and a setup built around responsiveness.</p></div>
-<div class="statrow"><div class="stat"><b>FPS</b><span>First</span></div><div class="stat"><b>REFLEX</b><span>Priority</span></div></div>
-</article>
-</div>
-</section>
+.navlinks a{
+  position:relative;
+  transition:color .25s ease,opacity .25s ease,transform .25s ease;
+}
 
-<section class="games-section" id="games">
-<div class="games-inner section">
-<div class="section-label">Library</div>
-<h2 class="section-title">What are we<br><span>playing?</span></h2>
-<div class="gamegrid">
+.navlinks a:not(.navbutton)::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-7px;
+  width:0;
+  height:1px;
+  background:#fff;
+  transform:translateX(-50%);
+  transition:width .3s ease;
+}
 
-<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Horror / Action</small><h3>Resident Evil 4</h3><p>Ready for your RTX 5070 + 7800X3D.</p></div></article>
+.navlinks a:hover{
+  color:#fff;
+  transform:translateY(-1px);
+}
 
-<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Action / Story</small><h3>The Last of Us Part II</h3><p>Cinematic gaming at high settings.</p></div></article>
+.navlinks a:not(.navbutton):hover::after{
+  width:100%;
+}
 
-<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Action</small><h3>Space Marine 2</h3><p>Built for big battles and heavy workloads.</p></div></article>
+.navbutton{
+  padding:9px 17px;
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  color:#000!important;
+  font-weight:600;
+  box-shadow:
+    0 4px 20px rgba(255,255,255,.08),
+    inset 0 0 0 1px rgba(255,255,255,.3);
+  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
+}
 
-<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Action / RPG</small><h3>Atomic Heart</h3><p>A visually intense world on your setup.</p></div></article>
+.navbutton:hover{
+  transform:translateY(-2px) scale(1.02)!important;
+  background:#fff;
+  box-shadow:
+    0 8px 30px rgba(255,255,255,.16),
+    0 0 30px rgba(255,255,255,.08);
+}
 
-</div>
-</div>
-</section>
+/* HERO */
 
-<section class="chat-section" id="chat">
-<div class="chat-copy">
-<div class="section-label">AI Gaming Chat</div>
-<h2>Ask anything.<br><span style="color:#777">Get gaming answers.</span></h2>
-<p>Твой GameChat знает конфигурацию ПК. Нажми готовый вопрос или напиши свой — сайт подготовит запрос и откроет ChatGPT.</p>
-<div style="margin-top:28px;color:#777;font-size:13px;line-height:1.6">Без API-ключа. Без сервера. Твои характеристики автоматически добавляются в запрос.</div>
-</div>
+.hero{
+  min-height:88vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(91,64,255,.38),transparent 35%),
+    radial-gradient(circle at 20% 80%,rgba(0,160,255,.18),transparent 30%),
+    #000;
+}
 
-<div class="chatbox">
-<div class="messages" id="messages">
-<div class="bubble ai">Привет. Я GameChat AI. Выбери вопрос ниже или напиши свой — я подготовлю его для ChatGPT с учётом твоего ПК.</div>
-</div>
+.hero::before{
+  content:"";
+  position:absolute;
+  width:650px;
+  height:650px;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(105,72,255,.22),
+      rgba(105,72,255,.08) 35%,
+      transparent 70%
+    );
+  filter:blur(50px);
+  animation:heroGlow 8s ease-in-out infinite alternate;
+}
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px">
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Что мне сейчас пройти? Подбери несколько игр под мой вкус и объясни, почему.')">🎮 Что пройти?</button>
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Какой FPS я могу ожидать в современных играх на моём ПК? Раздели на 1080p и 1440p, если возможно.')">📈 Какой FPS ждать?</button>
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Сравни Space Marine 2 и Atomic Heart по графике, геймплею, продолжительности, качеству и тому, какая игра лучше подойдёт мне.')">🆚 Сравнить игры</button>
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Разбери мой текущий ПК. Какие у него сильные стороны, какие слабые места и что имеет смысл апгрейдить в будущем?')">⚙️ Разобрать ПК</button>
-</div>
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(255,255,255,.025) 45%,
+      transparent 70%
+    );
+  transform:translateX(-100%);
+  animation:heroSweep 10s ease-in-out infinite;
+  pointer-events:none;
+}
 
-<div class="composer">
-<input id="input" placeholder="Например: сколько FPS будет в RE4?" onkeydown="if(event.key==='Enter')send()">
-<button class="send" onclick="send()">↑</button>
-</div>
-</div>
-</section>
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:1000px;
+  padding:80px 25px;
+  animation:heroContentIn 1.1s cubic-bezier(.2,.8,.2,1) both;
+}
 
-<footer class="footer">GameChat · Personal gaming ecosystem · 2026</footer>
-</div>
+.kicker{
+  color:#aaa;
+  font-size:17px;
+  margin-bottom:22px;
+  animation:fadeUp .8s .05s cubic-bezier(.2,.8,.2,1) both;
+}
 
-<section class="chat-section" id="chat">
-<div class="chat-copy">
-<div class="section-label">AI Gaming Chat</div>
-<h2>Ask anything.<br><span style="color:#777">Get gaming answers.</span></h2>
-<p>Твой GameChat знает конфигурацию ПК. Нажми готовый вопрос или напиши свой — сайт подготовит запрос и откроет ChatGPT.</p>
-<div style="margin-top:28px;color:#777;font-size:13px;line-height:1.6">Без API-ключа. Без сервера. Твои характеристики автоматически добавляются в запрос.</div>
-</div>
+.hero h1{
+  font-size:clamp(64px,9vw,128px);
+  line-height:.92;
+  letter-spacing:-7px;
+  font-weight:700;
+  text-wrap:balance;
+  animation:fadeUp 1s .12s cubic-bezier(.2,.8,.2,1) both;
+}
 
-<div class="chatbox">
-<div class="messages" id="messages">
-<div class="bubble ai">Привет. Я GameChat AI. Выбери вопрос ниже или напиши свой — я подготовлю его для ChatGPT с учётом твоего ПК.</div>
-</div>
+.gradient{
+  background:
+    linear-gradient(
+      90deg,
+      #fff 0%,
+      #d7d0ff 22%,
+      #8d79ff 55%,
+      #50bfff 100%
+    );
+  background-size:180% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:gradientMove 7s ease-in-out infinite alternate;
+}
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px">
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Что мне сейчас пройти? Подбери несколько игр под мой вкус и объясни, почему.')">🎮 Что пройти?</button>
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Какой FPS я могу ожидать в современных играх на моём ПК? Раздели на 1080p и 1440p, если возможно.')">📈 Какой FPS ждать?</button>
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Сравни Space Marine 2 и Atomic Heart по графике, геймплею, продолжительности, качеству и тому, какая игра лучше подойдёт мне.')">🆚 Сравнить игры</button>
-<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Разбери мой текущий ПК. Какие у него сильные стороны, какие слабые места и что имеет смысл апгрейдить в будущем?')">⚙️ Разобрать ПК</button>
-</div>
+.hero p{
+  max-width:680px;
+  margin:35px auto;
+  color:#a1a1a6;
+  font-size:22px;
+  line-height:1.45;
+  animation:fadeUp 1s .24s cubic-bezier(.2,.8,.2,1) both;
+}
 
-<div class="composer">
-<input id="input" placeholder="Например: сколько FPS будет в RE4?" onkeydown="if(event.key==='Enter')send()">
-<button class="send" onclick="send()">↑</button>
-</div>
-</div>
-</section>
+.ctas{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  animation:fadeUp 1s .36s cubic-bezier(.2,.8,.2,1) both;
+}
 
+.primary,
+.secondary{
+  padding:15px 25px;
+  border-radius:999px;
+  font-size:16px;
+  font-weight:600;
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    background .35s ease,
+    border-color .35s ease;
+}
 
-<div class="android-bar" aria-label="GameChat mobile navigation">
-  <a href="#top">Home</a><a href="#setup">Setup</a><a href="#games">Games</a><a href="#chat">AI</a>
-</div>
-<style>
-.android-bar{display:none}
-@media(max-width:750px){.android-bar{position:fixed;z-index:50;left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));height:58px;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:rgba(18,18,20,.82);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);display:flex;align-items:center;justify-content:space-around;box-shadow:0 15px 45px rgba(0,0,0,.4)}.android-bar a{color:#aaa;text-decoration:none;font-size:12px;font-weight:600;padding:12px 14px}.android-bar a:active{color:#fff;transform:scale(.94)}body{padding-bottom:88px}}</style>
-<script>
-if('serviceWorker' in navigator){window.addEventListener('load',()=>{
-  const sw=`self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>self.clients.claim());self.addEventListener('fetch',e=>{});`;
-  try{const blob=new Blob([sw],{type:'text/javascript'});navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});}catch(e){}
-});}
-</script>
-</body>
-</html>
+.primary{
+  background:#fff;
+  color:#000;
+  box-shadow:0 10px 35px rgba(255,255,255,.08);
+}
+
+.secondary{
+  border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+  background:rgba(255,255,255,.035);
+  backdrop-filter:blur(15px);
+}
+
+.primary:hover,
+.secondary:hover{
+  transform:translateY(-4px) scale(1.015);
+}
+
+.primary:hover{
+  box-shadow:
+    0 15px 45px rgba(255,255,255,.15),
+    0 0 30px rgba(255,255,255,.05);
+}
+
+.secondary:hover{
+  border-color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.08);
+}
+
+/* SECTIONS */
+
+.section{
+  padding:120px 7%;
+}
+
+.section.light{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(120,100,255,.06),transparent 25%),
+    #f5f5f7;
+  color:#111;
+}
+
+.section-title{
+  max-width:850px;
+  margin-bottom:70px;
+}
+
+.section-title .small{
+  font-size:18px;
+  color:#777;
+  margin-bottom:15px;
+  letter-spacing:-.2px;
+}
+
+.section-title h2{
+  font-size:clamp(45px,7vw,88px);
+  line-height:.95;
+  letter-spacing:-5px;
+  text-wrap:balance;
+}
+
+.section-title p{
+  margin-top:25px;
+  font-size:20px;
+  color:#777;
+  max-width:650px;
+  line-height:1.5;
+}
+
+/* SETUP */
+
+.setup-hero{
+  min-height:650px;
+  border-radius:38px;
+  padding:70px;
+  display:flex;
+  align-items:flex-end;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 70% 20%,#6c4fff,transparent 28%),
+    radial-gradient(circle at 20% 80%,#0c6bff,transparent 30%),
+    linear-gradient(135deg,#15151c,#020203);
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.07);
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    box-shadow .7s ease;
+}
+
+.setup-hero:hover{
+  transform:translateY(-5px);
+  box-shadow:
+    0 45px 120px rgba(0,0,0,.45),
+    0 0 80px rgba(90,70,255,.08),
+    inset 0 0 0 1px rgba(255,255,255,.1);
+}
+
+.setup-hero::before{
+  content:"";
+  position:absolute;
+  width:600px;
+  height:600px;
+  right:-100px;
+  top:-160px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,rgba(255,255,255,.12),transparent 62%);
+  filter:blur(25px);
+  animation:setupOrb 9s ease-in-out infinite alternate;
+}
+
+.setup-hero::after{
+  content:"";
+  position:absolute;
+  width:450px;
+  height:450px;
+  right:12%;
+  top:15%;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  filter:blur(5px);
+  box-shadow:
+    0 0 100px rgba(109,78,255,.7),
+    inset 0 0 100px rgba(255,255,255,.08);
+  animation:orbPulse 6s ease-in-out infinite alternate;
+}
+
+.setup-content{
+  position:relative;
+  z-index:2;
+}
+
+.setup-content span{
+  color:#b4b4bd;
+  font-size:18px;
+}
+
+.setup-content h3{
+  margin-top:15px;
+  font-size:clamp(45px,6vw,78px);
+  letter-spacing:-4px;
+}
+
+.setup-content p{
+  margin-top:20px;
+  max-width:600px;
+  color:#aaa;
+  font-size:20px;
+}
+
+/* HARDWARE */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  min-height:330px;
+  border-radius:30px;
+  padding:35px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.01)),
+    #111;
+  border:1px solid rgba(255,255,255,.08);
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    border-color .4s ease,
+    box-shadow .5s ease,
+    background .5s ease;
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  left:var(--mx,50%);
+  top:var(--my,50%);
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(circle,rgba(120,90,255,.18),transparent 65%);
+  filter:blur(20px);
+  opacity:0;
+  transition:opacity .4s ease;
+  pointer-events:none;
+}
+
+.card:hover{
+  transform:translateY(-9px) scale(1.012);
+  border-color:rgba(255,255,255,.2);
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.22),
+    0 0 50px rgba(100,80,255,.07);
+}
+
+.card:hover::before{
+  opacity:1;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-60px;
+  bottom:-70px;
+  background:rgba(110,80,255,.2);
+  filter:blur(50px);
+  z-index:-1;
+  transition:transform .6s ease,opacity .6s ease;
+}
+
+.card:hover::after{
+  transform:scale(1.35);
+  opacity:.9;
+}
+
+.card .icon{
+  font-size:38px;
+  margin-bottom:45px;
+  transition:
+    transform .4s cubic-bezier(.2,.8,.2,1),
+    text-shadow .4s ease;
+}
+
+.card:hover .icon{
+  transform:scale(1.12) translateY(-3px);
+  text-shadow:0 0 25px rgba(120,100,255,.45);
+}
+
+.card h3{
+  font-size:28px;
+  letter-spacing:-1px;
+}
+
+.card p{
+  margin-top:13px;
+  color:#999;
+  line-height:1.5;
+}
+
+.spec{
+  margin-top:30px;
+  color:#fff;
+  font-size:15px;
+  font-weight:500;
+}
+
+.light .card{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,255,255,.7)),
+    #fff;
+  border-color:rgba(0,0,0,.08);
+  box-shadow:0 10px 35px rgba(0,0,0,.04);
+}
+
+.light .card:hover{
+  border-color:rgba(0,0,0,.15);
+  box-shadow:0 25px 70px rgba(0,0,0,.1);
+}
+
+.light .card p{
+  color:#777;
+}
+
+.light .card .spec{
+  color:#111;
+}
+
+/* PERFORMANCE */
+
+.performance{
+  background:
+    radial-gradient(circle at 80% 20%,rgba(89,62,255,.25),transparent 30%),
+    radial-gradient(circle at 10% 90%,rgba(0,140,255,.08),transparent 25%),
+    #050507;
+}
+
+.performance-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:18px;
+}
+
+.performance-card{
+  min-height:330px;
+  border-radius:30px;
+  padding:40px;
+  background:
+    linear-gradient(145deg,#17171d,#08080a);
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    border-color .4s ease,
+    box-shadow .5s ease;
+}
+
+.performance-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,255,255,.18);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35),
+    0 0 50px rgba(90,70,255,.06);
+}
+
+.performance-card.big{
+  min-height:450px;
+}
+
+.performance-card h3{
+  font-size:42px;
+  letter-spacing:-2px;
+}
+
+.performance-card .number{
+  font-size:clamp(60px,7vw,110px);
+  font-weight:700;
+  letter-spacing:-6px;
+  background:linear-gradient(135deg,#fff,#aaa);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.performance-card p{
+  color:#999;
+  font-size:18px;
+}
+
+.performance-card small{
+  color:#777;
+}
+
+/* GAMES */
+
+.games{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(110,90,255,.06),transparent 25%),
+    #f5f5f7;
+  color:#111;
+}
+
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.game{
+  min-height:450px;
+  border-radius:35px;
+  padding:40px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  background:
+    linear-gradient(135deg,#16161b,#050505);
+  color:white;
+  box-shadow:0 15px 45px rgba(0,0,0,.08);
+  transition:
+    transform .6s cubic-bezier(.2,.8,.2,1),
+    box-shadow .6s ease;
+}
+
+.game::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background:
+    radial-gradient(
+      circle at var(--gx,50%) var(--gy,50%),
+      rgba(255,255,255,.12),
+      transparent 25%
+    );
+  opacity:0;
+  transition:opacity .5s ease;
+  pointer-events:none;
+}
+
+.game:hover{
+  transform:translateY(-10px) scale(1.012);
+  box-shadow:0 30px 80px rgba(0,0,0,.18);
+}
+
+.game:hover::before{
+  opacity:1;
+}
+
+.game:nth-child(2){
+  background:
+    radial-gradient(circle at 80% 20%,rgba(80,120,255,.45),transparent 35%),
+    #101016;
+}
+
+.game:nth-child(3){
+  background:
+    radial-gradient(circle at 30% 30%,rgba(255,50,50,.25),transparent 35%),
+    #101010;
+}
+
+.game:nth-child(4){
+  background:
+    radial-gradient(circle at 70% 40%,rgba(255,170,50,.3),transparent 35%),
+    #12100c;
+}
+
+.game-info{
+  position:relative;
+  z-index:2;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+}
+
+.game:hover .game-info{
+  transform:translateY(-5px);
+}
+
+.game-info span{
+  color:#aaa;
+  font-size:15px;
+}
+
+.game-info h3{
+  margin-top:10px;
+  font-size:45px;
+  letter-spacing:-2px;
+}
+
+.game-info p{
+  margin-top:12px;
+  color:#aaa;
+}
+
+/* CHAT */
+
+.chat-section{
+  padding:130px 7%;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(89,65,255,.3),transparent 35%),
+    radial-gradient(circle at 20% 100%,rgba(0,130,255,.08),transparent 30%),
+    #000;
+}
+
+.chat{
+  max-width:1050px;
+  margin:auto;
+  border-radius:35px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015)),
+    #0d0d10;
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.6),
+    0 0 80px rgba(80,60,255,.06);
+  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
+  transition:border-color .4s ease,box-shadow .5s ease;
+}
+
+.chat:hover{
+  border-color:rgba(255,255,255,.16);
+  box-shadow:
+    0 35px 110px rgba(0,0,0,.65),
+    0 0 100px rgba(80,60,255,.09);
+}
+
+.chat-head{
+  padding:25px 30px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(255,255,255,.015);
+}
+
+.chat-title{
+  font-size:20px;
+  font-weight:600;
+}
+
+.status{
+  font-size:13px;
+  color:#65d98a;
+  text-shadow:0 0 12px rgba(101,217,138,.35);
+}
+
+.messages{
+  min-height:360px;
+  max-height:500px;
+  overflow-y:auto;
+  padding:30px;
+  scrollbar-width:thin;
+  scrollbar-color:#333 transparent;
+}
+
+.message{
+  max-width:75%;
+  padding:16px 19px;
+  border-radius:20px;
+  margin-bottom:15px;
+  line-height:1.45;
+  animation:messageIn .4s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.bot{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.035));
+  color:#ddd;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.user{
+  margin-left:auto;
+  background:#fff;
+  color:#000;
+  box-shadow:0 8px 25px rgba(255,255,255,.05);
+}
+
+.quick-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  padding:0 30px 22px;
+}
+
+.quick-btn{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.035);
+  color:#ddd;
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:13px;
+  cursor:pointer;
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    border-color .3s ease,
+    color .3s ease;
+}
+
+.quick-btn:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.25);
+  color:#fff;
+}
+
+.chat-input{
+  display:flex;
+  gap:10px;
+  padding:18px;
+  border-top:1px solid rgba(255,255,255,.08);
+  background:rgba(0,0,0,.18);
+}
+
+.chat-input input{
+  flex:1;
+  padding:15px 18px;
+  border-radius:15px;
+  border:1px solid #333;
+  background:rgba(21,21,25,.85);
+  color:white;
+  outline:none;
+  font-size:15px;
+  transition:
+    border-color .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.chat-input input:focus{
+  border-color:rgba(130,105,255,.65);
+  background:#17171c;
+  box-shadow:0 0 0 4px rgba(100,80,255,.08);
+}
+
+.chat-input button{
+  border:0;
+  border-radius:15px;
+  padding:0 24px;
+  background:white;
+  color:black;
+  font-weight:600;
+  cursor:pointer;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.chat-input button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 25px rgba(255,255,255,.12);
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:30px;
+  z-index:999;
+  transform:translate(-50%,30px);
+  opacity:0;
+  padding:13px 18px;
+  border-radius:999px;
+  background:rgba(25,25,28,.86);
+  color:white;
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(20px);
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+  pointer-events:none;
+  transition:
+    opacity .35s ease,
+    transform .35s ease;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* FOOTER */
+
+footer{
+  padding:60px 7%;
+  border-top:1px solid #222;
+  color:#777;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+footer strong{
+  color:white;
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:
+    opacity .9s cubic-bezier(.2,.8,.2,1),
+    transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ANIMATIONS */
+
+@keyframes heroGlow{
+  from{
+    transform:scale(.9) translate(-2%,-1%);
+    opacity:.7;
+  }
+  to{
+    transform:scale(1.1) translate(3%,2%);
+    opacity:1;
+  }
+}
+
+@keyframes heroSweep{
+  0%,45%{transform:translateX(-100%)}
+  65%,100%{transform:translateX(100%)}
+}
+
+@keyframes heroContentIn{
+  from{
+    opacity:0;
+    transform:translateY(25px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(22px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes gradientMove{
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
+}
+
+@keyframes setupOrb{
+  from{
+    transform:translate(0,0) scale(.9);
+  }
+  to{
+    transform:translate(-50px,35px) scale(1.1);
+  }
+}
+
+@keyframes orbPulse{
+  from{
+    transform:scale(.92);
+    opacity:.55;
+  }
+  to{
+    transform:scale(1.08);
+    opacity:.85;
+  }
+}
+
+@keyframes messageIn{
+  from{
+    opacity:0;
+    transform:translateY(8px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* TABLET */
+
+@media (max-width:850px){
+
+  .nav{
+    padding:0 20px;
+  }
+
+  .navlinks{
+    gap:10px;
+  }
+
+  .navlinks a:not(.navbutton){
+    display:none;
+  }
+
+  .hero h1{
+    letter-spacing:-4px;
+  }
+
+  .hero p{
+    font-size:18px;
+  }
+
+  .section{
+    padding:80px 20px;
+  }
+
+  .section-title h2{
+    letter-spacing:-3px;
+  }
+
+  .setup-hero{
+    padding:35px;
+    min-height:500px;
+    border-radius:28px;
+  }
+
+  .grid,
+  .performance-grid,
+  .game-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card,
+  .performance-card{
+    min-height:270px;
+  }
+
+  .performance-card.big{
+    min-height:350px;
+  }
+
+  .game{
+    min-height:350px;
+  }
+
+  .messages{
+    padding:22px;
+  }
+
+  .quick-actions{
+    padding:0 22px 18px;
+  }
+
+  .message{
+    max-width:88%;
+  }
+
+  .chat-input{
+    padding:14px;
+  }
+
+  .chat-input button{
+    padding:0 18px;
+  }
+
+  footer{
+    flex-direction:column;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width:500px){
+
+  .nav{
+    height:54px;
+  }
+
+  .brand{
+    font-size:18px;
+  }
+
+  .hero-content{
+    padding:70px 18px;
+  }
+
+  .hero h1{
+    font-size:56px;
+    letter-spacing:-3.5px;
+  }
+
+  .hero p{
+    font-size:17px;
+    margin:28px auto;
+  }
+
+  .primary,
+  .secondary{
+    width:100%;
+    text-align:center;
+  }
+
+  .setup-content h3{
+    font-size:43px;
+    letter-spacing:-3px;
+  }
+
+  .setup-content p{
+    font-size:17px;
+  }
+
+  .card{
+    padding:28px;
+  }
+
+  .performance-card{
+    padding:30px;
+  }
+
+  .performance-card .number{
+    font-size:70px;
+  }
+
+  .game{
+    padding:28px;
+  }
+
+  .game-info h3{
+    font-size:36px;
+  }
+
+  .chat{
+    border-radius:25px;
+  }
+
+  .chat-head{
+    padding:20px;
+  }
+
+  .chat-title{
+    font-size:18px;
+  }
+
+  .messages{
+    min-height:320px;
+    padding:20px;
+  }
+
+  .message{
+    max-width:92%;
+    padding:14px 16px;
+  }
+
+  .quick-actions{
+    padding:0 20px 18px;
+  }
+
+  .quick-btn{
+    font-size:12px;
+    padding:9px 12px;
+  }
+
+  .chat-input{
+    gap:8px;
+    padding:12px;
+  }
+
+  .chat-input input{
+    min-width:0;
+    padding:14px;
+  }
+
+  .chat-input button{
+    padding:0 16px;
+  }
+
+  .toast{
+    width:calc(100% - 32px);
+    text-align:center;
+    bottom:18px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.0
