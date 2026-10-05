@@ -1,395 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gaming Desk Setup</title>
-<link rel="stylesheet" href="https://unpkg.com/simplebar/dist/simplebar.min.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GameChat — Your gaming setup</title>
 <style>
-:root {
-  --bg: #000000;
-  --text: #ffffff;
-  --accent-start: #0071e3;
-  --accent-mid: #a259ff;
-  --accent-alt: #fc5c7d;
-  --accent-end: #fd7e14;
-  --card-bg: #121212;
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  --browser-panel-bg: #e0e0e0;
-  --browser-panel-text: #000000;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.simplebar-scrollbar:before {
-  background-color: #888 !important;
-  border-radius: 6px;
-}
-.simplebar-track.simplebar-vertical {
-    background-color: #0d0d0d;
-}
-.simplebar-scrollbar {
-    border: none;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  scroll-behavior: smooth;
-  transition: background-color 0.4s, color 0.4s;
-}
-
-.browser-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 56px;
-  background-color: var(--browser-panel-bg);
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-  z-index: 1000;
-  justify-content: flex-end;
-}
-
-.menu-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  width: 28px;
-  height: 18px;
-  cursor: pointer;
-  z-index: 9999;
-  background-color: transparent;
-  border: none;
-  box-sizing: content-box;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-  margin-left: auto;
-  margin-right: 20px;
-}
-
-.menu-icon:hover {
-    opacity: 0.6;
-}
-
-.menu-icon span {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: var(--browser-panel-text);
-  border-radius: 1.5px;
-  position: absolute;
-  left: 0;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  transform-origin: center center;
-}
-
-.menu-icon span:first-child {
-  top: 0;
-}
-
-.menu-icon span:last-child {
-  bottom: 0;
-}
-
-.menu-icon.active span:first-child {
-  transform: translateY(7.5px) rotate(45deg);
-}
-
-.menu-icon.active span:last-child {
-  transform: translateY(-7.5px) rotate(-45deg);
-}
-
-.scroll-container {
-  height: calc(100% - 56px);
-  margin-top: 56px;
-  box-sizing: border-box;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  font-weight: 600;
-  background: linear-gradient(90deg, var(--accent-start), var(--accent-mid), var(--accent-alt), var(--accent-end));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientApple 6s ease infinite, fadeIn 1.5s ease forwards;
-  opacity: 0;
-  text-align: center;
-  cursor: pointer;
-  user-select: none;
-  padding-top: 20px;
-}
-
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  max-width: 960px;
-  margin: 0 auto;
-  padding-bottom: 20px;
-}
-
-.component {
-  position: relative;
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 8px var(--shadow-color);
-  opacity: 0;
-  animation: slideUp 0.6s ease forwards;
-  animation-delay: calc(0.2s * var(--order));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100px;
-  overflow: visible;
-  z-index: 0;
-  will-change: transform, opacity;
-}
-
-.component::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 2px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent-start), var(--accent-mid), var(--accent-alt), var(--accent-end));
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.component:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px var(--shadow-color);
-}
-
-.component:active {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px var(--shadow-color);
-}
-
-.title {
-  color: var(--accent-start);
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-size: 1.25rem;
-  transition: color 0.3s ease;
-}
-
-.component:hover .title {
-  color: var(--accent-end);
-}
-
-.component:nth-of-type(1) { --order: 1; }
-.component:nth-of-type(2) { --order: 2; }
-.component:nth-of-type(3) { --order: 3; }
-.component:nth-of-type(4) { --order: 4; }
-.component:nth-of-type(5) { --order: 5; }
-.component:nth-of-type(6) { --order: 6; }
-.component:nth-of-type(7) { --order: 7; }
-.component:nth-of-type(8) { --order: 8; }
-.component:nth-of-type(9) { --order: 9; }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-@keyframes gradientApple {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.gpu-card-popup {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translate(10px, -50%);
-  background: #1a1a1a;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-  width: 250px;
-  z-index: 3000;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  transition: opacity 0.3s ease;
-}
-.gpu-card-popup img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.gpu-card-popup img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-}
-.gpu-card-popup h4 {
-  margin: 0 0 8px;
-  color: var(--accent-mid);
-  text-align: center;
-}
-.gpu-card-popup ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  width: 100%;
-  color: #ccc;
-}
-.gpu-card-popup ul li {
-  font-size: 0.85rem;
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-}
-.gpu-card-popup ul li::before {
-  content: "•";
-  color: var(--accent-start);
-  margin-right: 6px;
-}
-
-@media (max-width: 768px) {
-  .gpu-card-popup {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin-top: 10px;
-    width: 100%;
-  }
-  main {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    padding: 0 15px 20px;
-  }
-  .component {
-    padding: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  main {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 0 10px 15px;
-  }
-  .component {
-    padding: 10px;
-  }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+.app{min-height:100vh;background:#050505;color:#f5f5f7}
+.nav{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:10;backdrop-filter:blur(24px);background:rgba(5,5,5,.8);border-bottom:1px solid #222}
+.brand{font-weight:700;font-size:20px}
+.brand span{color:#777}
+.navlinks{display:flex;gap:28px;align-items:center}
+.navlinks a{color:inherit;text-decoration:none;font-size:14px;opacity:.7}
+.theme{border:0;background:transparent;color:white;font-size:20px}
+.hero{min-height:720px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 20px;background:radial-gradient(circle at 50% 40%,#242424,#050505 55%)}
+.eyebrow{font-size:12px;letter-spacing:.18em;font-weight:700;color:#888;margin-bottom:18px}
+.hero h1{font-size:clamp(60px,10vw,130px);line-height:.9;letter-spacing:-.075em;margin:0}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#fff,#777);-webkit-background-clip:text;color:transparent}
+.sub{max-width:610px;color:#999;font-size:19px;line-height:1.5;margin:34px 0}
+.pill{padding:13px 22px;border-radius:999px;background:white;color:#000;text-decoration:none;font-weight:600}
+.section{max-width:1200px;margin:auto;padding:120px 6%}
+.section h2{font-size:clamp(42px,6vw,72px);letter-spacing:-.06em;margin:0 0 50px}
+.specgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:#111;border:1px solid #242424;border-radius:28px;padding:28px;min-height:145px;display:flex;flex-direction:column;justify-content:space-between}
+.card span,.gamecard span{font-size:12px;color:#777;text-transform:uppercase;letter-spacing:.12em}
+.card strong{font-size:21px}
+.gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.gamecard{overflow:hidden;border-radius:30px;background:#111;border:1px solid #242424}
+.gameimage{height:280px;background:linear-gradient(135deg,#252525,#080808)}
+.g1{background:linear-gradient(135deg,#3b4540,#101211)}
+.g2{background:linear-gradient(135deg,#45413a,#101010)}
+.g3{background:linear-gradient(135deg,#44352b,#0b0b0b)}
+.gamecard>div:last-child{padding:24px}
+.gamecard h3{font-size:28px;margin:8px 0}
+.gamecard p,.chatintro p{color:#888;line-height:1.5}
+.chatsection{padding:120px 6%;display:grid;grid-template-columns:1fr 1.2fr;gap:70px;max-width:1200px;margin:auto}
+.chatintro h2{font-size:72px;letter-spacing:-.07em;margin:0}
+.chatbox{background:#111;border:1px solid #292929;border-radius:30px;padding:20px;min-height:500px;display:flex;flex-direction:column}
+.messages{flex:1;display:flex;flex-direction:column;gap:12px}
+.bubble{max-width:78%;padding:14px 17px;border-radius:18px;line-height:1.45}
+.bubble.ai{background:#222;align-self:flex-start}
+.bubble.user{background:white;color:black;align-self:flex-end}
+.composer{display:flex;gap:10px;margin-top:18px}
+.composer input{flex:1;border:1px solid #333;background:transparent;color:white;border-radius:16px;padding:14px 16px;outline:none}
+.composer button{width:48px;border:0;border-radius:16px;background:white;color:black;font-size:20px}
+footer{text-align:center;color:#666;padding:60px 20px;border-top:1px solid #222}
+@media(max-width:750px){
+.navlinks a{display:none}
+.specgrid,.gamegrid,.chatsection{grid-template-columns:1fr}
+.chatsection{gap:45px}
+.hero{min-height:650px}
+.hero h1{font-size:62px}
+.section{padding:85px 5%}
+.chatintro h2{font-size:58px}
 }
 </style>
 </head>
+
 <body>
-<div class="browser-panel">
-  <div class="menu-icon" id="menuIcon">
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<div class="scroll-container" data-simplebar>
-  <h1 id="pageTitle">Gaming Desk Setup</h1>
-  <main>
-    <section class="component" role="region" aria-label="Video Card" id="gpuCard">
-      <div class="title">Graphics</div>
-      ASUS Dual GeForce RTX™ 5070 12GB GDDR7 OC Edition
-      <div class="gpu-card-popup" id="gpuPopup">
-        <img src="https://i.ibb.co/abcd123/asus-rtx4060.jpg" alt="ASUS RTX 4060 DUAL V2" />
-        <h4>ASUS Dual GeForce RTX™ 5070 12GB GDDR7 OC Edition</h4>
-        <ul>
-          <li>8GB GDDR6</li>
-          <li>Boost Clock 2595 MHz</li>
-          <li>1x 8-pin Power</li>
-          <li>Dual Fans Cooling</li>
-        </ul>
-      </div>
-    </section>
+<main class="app">
 
-    <section class="component">
-  <div class="title">Processor</div>
-  <a href="https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800x3d.html"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="color: #ffffff; text-decoration: none;">
-     AMD Ryzen™ 7 7800X3D
-  </a>
-    </section>
-    <section class="component"><div class="title">Motherboard</div>ASUS ROG STRIX X870-F GAMING WIFI</section>
-    <section class="component"><div class="title">Cooling</div>DeepCool AG400 BK ARGB</section>
-    <section class="component"><div class="title">Memory</div>Trident Z5 Royal Neo</section>
-    <section class="component">
-  <div class="title">Storage</div>
-  <a href="https://www.samsung.com/us/memory-storage/nvme-ssd/9100-pro-nvme-ssd-sku-mz-vap2t0b-am/" target="_blank" style="color: #ffffff; text-decoration: none;">
-    9100 PRO
-  </a>
-  </section>
-    <section class="component"><div class="title">Power Supply</div>LIAN LI EDGE 1000W</section>
-    <section class="component"><div class="title">Chassis</div>O11 Vision Compact Black</section>
-    <section class="component"><div class="title">Fans</div>LIAN LI UNI FAN TL LCD 120</section>
-  </main>
+<nav class="nav">
+<div class="brand">GameChat<span>·</span></div>
+<div class="navlinks">
+<a href="#setup">Setup</a>
+<a href="#games">Games</a>
+<a href="#chat">AI Chat</a>
 </div>
-  <div class="component">
-  <h2>Operating System</h2>
-  <p>Windows 11 Pro</p>
-  </div>
+</nav>
 
-<script src="https://unpkg.com/simplebar/dist/simplebar.min.js"></script>
+<section class="hero">
+<p class="eyebrow">YOUR GAMING ECOSYSTEM</p>
+<h1>Your games.<br><em>Your setup.</em><br>One place.</h1>
+<p class="sub">A clean gaming hub built around your PC, your library and the games you actually care about.</p>
+<a class="pill" href="#setup">Explore my setup ↓</a>
+</section>
+
+<section id="setup" class="section">
+<p class="eyebrow">MY SETUP</p>
+<h2>Built for gaming.</h2>
+
+<div class="specgrid">
+
+<article class="card"><span>Graphics</span><strong>ASUS Dual GeForce RTX™ 5070 12GB GDDR7 OC Edition</strong></article>
+
+<article class="card"><span>Processor</span><strong>AMD Ryzen™ 7 7800X3D</strong></article>
+
+<article class="card"><span>Motherboard</span><strong>ASUS ROG STRIX X870-F GAMING WIFI</strong></article>
+
+<article class="card"><span>Cooling</span><strong>DeepCool AG400 BK ARGB</strong></article>
+
+<article class="card"><span>Memory</span><strong>G.Skill Trident Z5 Royal Neo</strong></article>
+
+<article class="card"><span>Storage</span><strong>Samsung 9100 PRO</strong></article>
+
+<article class="card"><span>Power Supply</span><strong>LIAN LI EDGE 1000W</strong></article>
+
+<article class="card"><span>Chassis</span><strong>Lian Li O11 Vision Compact Black</strong></article>
+
+<article class="card"><span>Fans</span><strong>LIAN LI UNI FAN TL LCD 120</strong></article>
+
+<article class="card"><span>Operating System</span><strong>Windows 11 Pro</strong></article>
+
+</div>
+</section>
+
+<section id="games" class="section">
+
+<p class="eyebrow">LIBRARY</p>
+<h2>What are we playing?</h2>
+
+<div class="gamegrid">
+
+<article class="gamecard">
+<div class="gameimage"></div>
+<div><span>PC</span><h3>Resident Evil 4</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
+</article>
+
+<article class="gamecard">
+<div class="gameimage g1"></div>
+<div><span>PC</span><h3>The Last of Us Part II</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
+</article>
+
+<article class="gamecard">
+<div class="gameimage g2"></div>
+<div><span>PC</span><h3>Space Marine 2</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
+</article>
+
+<article class="gamecard">
+<div class="gameimage g3"></div>
+<div><span>PC</span><h3>Atomic Heart</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
+</article>
+
+</div>
+</section>
+
+<section id="chat" class="chatsection">
+
+<div class="chatintro">
+<p class="eyebrow">AI GAMING CHAT</p>
+<h2>Ask anything.</h2>
+<p>Games, graphics settings, FPS, hardware upgrades, what to buy next — all in one conversation.</p>
+</div>
+
+<div class="chatbox">
+
+<div class="messages" id="messages">
+<div class="bubble ai">Привет. Я знаю твою сборку и могу помочь с играми, FPS, настройками и покупками.</div>
+</div>
+
+<div class="composer">
+<input id="input" placeholder="Ask about a game...">
+<button onclick="send()">↑</button>
+</div>
+
+</div>
+</section>
+
+<footer>GameChat · Personal gaming hub · 2026</footer>
+
+</main>
+
 <script>
-const menuIcon = document.getElementById('menuIcon');
-const title = document.getElementById('pageTitle');
-const gpuCard = document.getElementById('gpuCard');
-const gpuPopup = document.getElementById('gpuPopup');
-const scrollContainer = document.querySelector('.simplebar-content-wrapper');
+function send(){
+const input=document.getElementById("input");
+const messages=document.getElementById("messages");
+const text=input.value.trim();
+if(!text)return;
 
-if (scrollContainer) {
-  scrollContainer.addEventListener('scroll', () => {
-    const scrollPos = scrollContainer.scrollTop;
-    title.style.transform = `translateY(${scrollPos * 0.3}px)`;
-  });
+messages.innerHTML+=
+'<div class="bubble user">'+text.replace(/</g,"&lt;")+'</div>'+
+'<div class="bubble ai">Демо-режим: интерфейс готов. Настоящий AI подключим следующим этапом.</div>';
+
+input.value="";
 }
-
-menuIcon.addEventListener('click', () => {
-  menuIcon.classList.toggle('active');
-});
-
-title.addEventListener('click', () => location.reload());
-
-gpuCard.addEventListener('click', (e) => {
-  if(window.innerWidth <= 768){
-    gpuPopup.style.display = (gpuPopup.style.display === 'flex') ? 'none' : 'flex';
-  }
-  e.stopPropagation();
-});
-
-document.addEventListener('click', () => {
-  if(window.innerWidth <= 768){
-    gpuPopup.style.display = 'none';
-  }
-});
 </script>
+
 </body>
 </html>
