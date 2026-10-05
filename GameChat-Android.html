@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000">
+<title>GameChat — Your gaming ecosystem</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif}
+button,input{font:inherit}
+a{text-decoration:none;color:inherit}
+.app{overflow:hidden;background:#000}
+.nav{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,6vw);position:sticky;top:0;z-index:20;background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(24px);border-bottom:1px solid rgba(255,255,255,.08)}
+.brand{font-size:19px;font-weight:700;letter-spacing:-.04em}.brand b{color:#777}
+.navlinks{display:flex;align-items:center;gap:30px;font-size:13px;color:#b5b5ba}
+.navlinks a:hover{color:#fff}
+.navbutton{border:0;background:#fff;color:#000;border-radius:999px;padding:7px 14px;font-size:12px;font-weight:600}
+
+.hero{min-height:900px;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px 140px;position:relative;background:radial-gradient(circle at 50% 42%,#252525 0,#090909 35%,#000 70%)}
+.hero:before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,255,255,.12) 22%,transparent 65%);opacity:.08;filter:blur(18px)}
+.hero-content{position:relative;z-index:1;max-width:1100px}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#86868b;font-weight:700;margin-bottom:24px}
+.hero h1{font-size:clamp(64px,10vw,148px);line-height:.88;letter-spacing:-.085em;margin:0;font-weight:700}
+.gradient{background:linear-gradient(100deg,#fff 15%,#aaa 50%,#fff 85%);-webkit-background-clip:text;color:transparent}
+.hero p{max-width:620px;margin:35px auto 0;color:#a1a1a6;font-size:20px;line-height:1.5}
+.ctas{display:flex;justify-content:center;gap:12px;margin-top:34px;flex-wrap:wrap}
+.primary,.secondary{padding:13px 21px;border-radius:999px;font-size:14px;font-weight:600}
+.primary{background:#fff;color:#000}.secondary{border:1px solid #444;color:#fff}
+
+.setup-hero{min-height:760px;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px;position:relative;background:linear-gradient(#000,#080808)}
+.setup-art{position:absolute;width:min(900px,90vw);height:430px;bottom:0;border-radius:50% 50% 8% 8%;background:radial-gradient(ellipse at 50% 25%,#555,#171717 38%,#050505 70%);filter:blur(.2px);box-shadow:0 -40px 130px rgba(255,255,255,.08)}
+.setup-content{position:relative;z-index:2;align-self:flex-start;padding-top:80px}
+.setup-content h2{font-size:clamp(48px,7vw,88px);letter-spacing:-.07em;margin:0}
+.setup-content p{font-size:20px;color:#999;max-width:620px;margin:20px auto}
+
+.section{max-width:1400px;margin:auto;padding:150px 6%}
+.section-label{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#86868b;font-weight:700;margin-bottom:18px}
+.section-title{font-size:clamp(48px,7vw,86px);letter-spacing:-.075em;line-height:.95;margin:0 0 60px}
+.section-title span{color:#777}
+
+.specgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{min-height:190px;padding:30px;border-radius:30px;background:linear-gradient(145deg,#181818,#0d0d0d);border:1px solid #252525;display:flex;flex-direction:column;justify-content:space-between;transition:.35s}
+.card:hover{transform:translateY(-4px);border-color:#444}
+.card .icon{font-size:27px;margin-bottom:25px}
+.card small{color:#777;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+.card strong{font-size:23px;line-height:1.15;letter-spacing:-.035em}
+
+.performance{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.performance-card{border-radius:34px;min-height:520px;padding:42px;background:linear-gradient(145deg,#151515,#070707);border:1px solid #242424;display:flex;flex-direction:column;justify-content:space-between}
+.performance-card h3{font-size:52px;letter-spacing:-.06em;margin:0}
+.performance-card p{color:#888;font-size:17px;line-height:1.5;max-width:500px}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{padding:20px;border-radius:22px;background:#111;border:1px solid #292929}
+.stat b{display:block;font-size:29px;letter-spacing:-.04em}.stat span{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.1em}
+
+.games-section{background:#f5f5f7;color:#111;padding-left:0;padding-right:0}
+.games-inner{max-width:1400px;margin:auto;padding:0 6%}
+.games-section .section-label{color:#777}
+.games-section .section-title span{color:#999}
+.gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.gamecard{min-height:600px;border-radius:34px;overflow:hidden;position:relative;background:#111;color:#fff}
+.gamevisual{position:absolute;inset:0;background:radial-gradient(circle at 55% 35%,#555,#171717 40%,#050505 75%);transition:.5s}
+.gamecard:nth-child(2) .gamevisual{background:radial-gradient(circle at 50% 35%,#52615a,#17201c 42%,#060807 76%)}
+.gamecard:nth-child(3) .gamevisual{background:radial-gradient(circle at 50% 35%,#6a604d,#211d16 42%,#070604 76%)}
+.gamecard:nth-child(4) .gamevisual{background:radial-gradient(circle at 50% 35%,#76513c,#24150e 42%,#070403 76%)}
+.gamecard:hover .gamevisual{transform:scale(1.05)}
+.gameinfo{position:absolute;inset:auto 0 0;padding:38px;background:linear-gradient(transparent,rgba(0,0,0,.92) 55%)}
+.gameinfo small{color:#aaa;text-transform:uppercase;letter-spacing:.13em}.gameinfo h3{font-size:42px;letter-spacing:-.055em;margin:8px 0}.gameinfo p{color:#aaa;margin:0}
+
+.chat-section{max-width:1400px;margin:auto;padding:160px 6%;display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}
+.chat-copy h2{font-size:clamp(58px,7vw,94px);letter-spacing:-.075em;line-height:.92;margin:0}
+.chat-copy p{color:#888;font-size:19px;line-height:1.5;max-width:480px}
+.chatbox{min-height:570px;border-radius:38px;padding:22px;background:linear-gradient(145deg,#171717,#090909);border:1px solid #292929;display:flex;flex-direction:column;box-shadow:0 30px 100px rgba(255,255,255,.04)}
+.messages{flex:1;display:flex;flex-direction:column;gap:12px;overflow:auto}
+.bubble{max-width:78%;padding:15px 18px;border-radius:20px;line-height:1.45;font-size:15px}
+.ai{background:#222;align-self:flex-start}.user{background:#fff;color:#000;align-self:flex-end}
+.composer{display:flex;gap:10px;margin-top:18px}.composer input{flex:1;border:1px solid #333;background:#111;color:#fff;border-radius:18px;padding:15px 17px;outline:none}.composer input:focus{border-color:#777}
+.send{width:50px;border:0;border-radius:18px;background:#fff;color:#000;font-size:21px}
+
+.footer{text-align:center;padding:80px 20px;color:#666;border-top:1px solid #181818;font-size:13px}
+
+@media(max-width:800px){
+.navlinks a{display:none}.hero{min-height:760px}.hero h1{font-size:64px}.hero p{font-size:17px}
+.setup-hero{min-height:620px}.setup-content{padding-top:20px}
+.specgrid,.performance,.gamegrid,.chat-section{grid-template-columns:1fr}
+.section{padding:100px 5%}.games-inner{padding:0 5%}
+.gamecard{min-height:500px}.chat-section{gap:45px}.chatbox{min-height:500px}
+.statrow{grid-template-columns:1fr 1fr}.nav{padding:0 5%}
+}
+
+/* Android touch / app-shell enhancements */
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;overscroll-behavior-x:none}
+body{padding-bottom:env(safe-area-inset-bottom)}
+a,button{touch-action:manipulation}
+button,.navbutton,.primary,.secondary{min-height:44px}
+@media(max-width:750px){
+  body{overflow-x:hidden}
+  .nav{height:64px;padding-top:env(safe-area-inset-top);box-sizing:content-box}
+  .navlinks{gap:8px}
+  .navlinks a[href="#setup"],.navlinks a[href="#performance"],.navlinks a[href="#games"]{display:none}
+  .navlinks a[href="#chat"]{display:block;font-size:13px}
+  .navbutton{display:block!important;padding:10px 14px!important}
+  .hero{min-height:calc(100svh - 64px);padding:90px 22px 70px}
+  .hero h1{font-size:clamp(52px,16vw,76px);line-height:.9}
+  .hero p{font-size:17px;line-height:1.45}
+  .ctas{gap:10px}.primary,.secondary{padding:13px 17px}
+  .section{padding:90px 20px}
+  .section-title{font-size:clamp(44px,13vw,64px);margin-bottom:38px}
+  .setup-hero{min-height:600px;padding:80px 20px}
+  .setup-content h2{font-size:clamp(48px,14vw,70px)}
+  .setup-content p{font-size:17px}
+  .specgrid,.performance,.gamegrid,.chat-section{grid-template-columns:1fr}
+  .card{min-height:165px;padding:25px;border-radius:25px}
+  .card strong{font-size:20px}
+  .performance-card{min-height:360px;padding:30px;border-radius:28px}
+  .performance-card h3{font-size:43px}
+  .gamecard{min-height:470px;border-radius:28px}
+  .gameinfo{padding:28px}
+  .gameinfo h3{font-size:34px}
+  .chat-section{padding:90px 20px;gap:35px}
+  .chatbox{min-height:calc(100svh - 150px);border-radius:28px;padding:16px}
+  .composer{padding-bottom:max(4px,env(safe-area-inset-bottom))}
+  .composer input{font-size:16px;min-height:48px}
+  .send{min-width:50px;min-height:48px}
+}
+@media(pointer:coarse){
+  .card:hover,.gamecard:hover,.performance-card:hover{transform:none}
+  .navlinks a,.primary,.secondary,.navbutton,.send{transition:transform .15s ease,opacity .15s ease}
+  .navlinks a:active,.primary:active,.secondary:active,.navbutton:active,.send:active{transform:scale(.96);opacity:.82}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.card,.gamecard,.performance-card{transition:none!important}}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<nav class="nav">
+<div class="brand">GameChat<b>·</b></div>
+<div class="navlinks">
+<a href="#setup">Setup</a><a href="#performance">Performance</a><a href="#games">Games</a><a href="#chat">AI Chat</a>
+<a class="navbutton" href="#chat">Open Chat</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="hero-content">
+<div class="kicker">Personal gaming ecosystem</div>
+<h1>Your games.<br><span class="gradient">Your setup.</span><br>Your world.</h1>
+<p>Everything about your gaming setup, library and performance — brought together in one beautiful place.</p>
+<div class="ctas"><a class="primary" href="#setup">Explore my setup</a><a class="secondary" href="#games">Explore games</a></div>
+</div>
+</section>
+
+<section class="setup-hero" id="setup">
+<div class="setup-art"></div>
+<div class="setup-content">
+<div class="kicker">The setup</div>
+<h2>Built for gaming.</h2>
+<p>RTX 5070. Ryzen 7 7800X3D. 1000 watts. One seriously capable machine.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label">Hardware</div>
+<h2 class="section-title">Every part.<br><span>Exactly where it belongs.</span></h2>
+
+<div class="specgrid">
+<article class="card"><div class="icon">◈</div><small>Graphics</small><strong>ASUS Dual GeForce RTX™ 5070<br>12GB GDDR7 OC Edition</strong></article>
+<article class="card"><div class="icon">◉</div><small>Processor</small><strong>AMD Ryzen™ 7 7800X3D</strong></article>
+<article class="card"><div class="icon">⌁</div><small>Motherboard</small><strong>ASUS ROG STRIX X870-F GAMING WIFI</strong></article>
+<article class="card"><div class="icon">◌</div><small>Cooling</small><strong>DeepCool AG400 BK ARGB</strong></article>
+<article class="card"><div class="icon">✦</div><small>Memory</small><strong>G.Skill Trident Z5 Royal Neo</strong></article>
+<article class="card"><div class="icon">▣</div><small>Storage</small><strong>Samsung 9100 PRO</strong></article>
+<article class="card"><div class="icon">ϟ</div><small>Power</small><strong>LIAN LI EDGE 1000W</strong></article>
+<article class="card"><div class="icon">□</div><small>Chassis</small><strong>Lian Li O11 Vision Compact Black</strong></article>
+<article class="card"><div class="icon">≋</div><small>Fans</small><strong>LIAN LI UNI FAN TL LCD 120</strong></article>
+<article class="card"><div class="icon">⌘</div><small>Operating system</small><strong>Windows 11 Pro</strong></article>
+</div>
+</section>
+
+<section class="section" id="performance">
+<div class="section-label">Performance</div>
+<h2 class="section-title">Made to play.<br><span>Made to stay fast.</span></h2>
+
+<div class="performance">
+<article class="performance-card">
+<div><div class="kicker">Gaming machine</div><h3>RTX 5070<br>× 7800X3D</h3><p>A balanced high-performance combination focused on high FPS, low latency and smooth competitive gaming.</p></div>
+<div class="statrow"><div class="stat"><b>12 GB</b><span>GDDR7</span></div><div class="stat"><b>180+</b><span>Hz display ready</span></div><div class="stat"><b>1000 W</b><span>Power</span></div></div>
+</article>
+
+<article class="performance-card">
+<div><div class="kicker">My focus</div><h3>Low latency.</h3><p>NVIDIA Reflex, high refresh rate gaming and a setup built around responsiveness.</p></div>
+<div class="statrow"><div class="stat"><b>FPS</b><span>First</span></div><div class="stat"><b>REFLEX</b><span>Priority</span></div></div>
+</article>
+</div>
+</section>
+
+<section class="games-section" id="games">
+<div class="games-inner section">
+<div class="section-label">Library</div>
+<h2 class="section-title">What are we<br><span>playing?</span></h2>
+<div class="gamegrid">
+
+<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Horror / Action</small><h3>Resident Evil 4</h3><p>Ready for your RTX 5070 + 7800X3D.</p></div></article>
+
+<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Action / Story</small><h3>The Last of Us Part II</h3><p>Cinematic gaming at high settings.</p></div></article>
+
+<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Action</small><h3>Space Marine 2</h3><p>Built for big battles and heavy workloads.</p></div></article>
+
+<article class="gamecard"><div class="gamevisual"></div><div class="gameinfo"><small>PC · Action / RPG</small><h3>Atomic Heart</h3><p>A visually intense world on your setup.</p></div></article>
+
+</div>
+</div>
+</section>
+
+<section class="chat-section" id="chat">
+<div class="chat-copy">
+<div class="section-label">AI Gaming Chat</div>
+<h2>Ask anything.<br><span style="color:#777">Get gaming answers.</span></h2>
+<p>Твой GameChat знает конфигурацию ПК. Нажми готовый вопрос или напиши свой — сайт подготовит запрос и откроет ChatGPT.</p>
+<div style="margin-top:28px;color:#777;font-size:13px;line-height:1.6">Без API-ключа. Без сервера. Твои характеристики автоматически добавляются в запрос.</div>
+</div>
+
+<div class="chatbox">
+<div class="messages" id="messages">
+<div class="bubble ai">Привет. Я GameChat AI. Выбери вопрос ниже или напиши свой — я подготовлю его для ChatGPT с учётом твоего ПК.</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px">
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Что мне сейчас пройти? Подбери несколько игр под мой вкус и объясни, почему.')">🎮 Что пройти?</button>
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Какой FPS я могу ожидать в современных играх на моём ПК? Раздели на 1080p и 1440p, если возможно.')">📈 Какой FPS ждать?</button>
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Сравни Space Marine 2 и Atomic Heart по графике, геймплею, продолжительности, качеству и тому, какая игра лучше подойдёт мне.')">🆚 Сравнить игры</button>
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Разбери мой текущий ПК. Какие у него сильные стороны, какие слабые места и что имеет смысл апгрейдить в будущем?')">⚙️ Разобрать ПК</button>
+</div>
+
+<div class="composer">
+<input id="input" placeholder="Например: сколько FPS будет в RE4?" onkeydown="if(event.key==='Enter')send()">
+<button class="send" onclick="send()">↑</button>
+</div>
+</div>
+</section>
+
+<footer class="footer">GameChat · Personal gaming ecosystem · 2026</footer>
+</div>
+
+<section class="chat-section" id="chat">
+<div class="chat-copy">
+<div class="section-label">AI Gaming Chat</div>
+<h2>Ask anything.<br><span style="color:#777">Get gaming answers.</span></h2>
+<p>Твой GameChat знает конфигурацию ПК. Нажми готовый вопрос или напиши свой — сайт подготовит запрос и откроет ChatGPT.</p>
+<div style="margin-top:28px;color:#777;font-size:13px;line-height:1.6">Без API-ключа. Без сервера. Твои характеристики автоматически добавляются в запрос.</div>
+</div>
+
+<div class="chatbox">
+<div class="messages" id="messages">
+<div class="bubble ai">Привет. Я GameChat AI. Выбери вопрос ниже или напиши свой — я подготовлю его для ChatGPT с учётом твоего ПК.</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px">
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Что мне сейчас пройти? Подбери несколько игр под мой вкус и объясни, почему.')">🎮 Что пройти?</button>
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Какой FPS я могу ожидать в современных играх на моём ПК? Раздели на 1080p и 1440p, если возможно.')">📈 Какой FPS ждать?</button>
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Сравни Space Marine 2 и Atomic Heart по графике, геймплею, продолжительности, качеству и тому, какая игра лучше подойдёт мне.')">🆚 Сравнить игры</button>
+<button class="secondary" style="background:#151515;cursor:pointer" onclick="askAI('Разбери мой текущий ПК. Какие у него сильные стороны, какие слабые места и что имеет смысл апгрейдить в будущем?')">⚙️ Разобрать ПК</button>
+</div>
+
+<div class="composer">
+<input id="input" placeholder="Например: сколько FPS будет в RE4?" onkeydown="if(event.key==='Enter')send()">
+<button class="send" onclick="send()">↑</button>
+</div>
+</div>
+</section>
+
+
+<div class="android-bar" aria-label="GameChat mobile navigation">
+  <a href="#top">Home</a><a href="#setup">Setup</a><a href="#games">Games</a><a href="#chat">AI</a>
+</div>
+<style>
+.android-bar{display:none}
+@media(max-width:750px){.android-bar{position:fixed;z-index:50;left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));height:58px;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:rgba(18,18,20,.82);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);display:flex;align-items:center;justify-content:space-around;box-shadow:0 15px 45px rgba(0,0,0,.4)}.android-bar a{color:#aaa;text-decoration:none;font-size:12px;font-weight:600;padding:12px 14px}.android-bar a:active{color:#fff;transform:scale(.94)}body{padding-bottom:88px}}</style>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{
+  const sw=`self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>self.clients.claim());self.addEventListener('fetch',e=>{});`;
+  try{const blob=new Blob([sw],{type:'text/javascript'});navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});}catch(e){}
+});}
+</script>
+</body>
+</html>
