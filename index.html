@@ -1,182 +1,1186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GameChat — Your gaming setup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameChat — Your gaming ecosystem</title>
+
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
-.app{min-height:100vh;background:#050505;color:#f5f5f7}
-.nav{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:10;backdrop-filter:blur(24px);background:rgba(5,5,5,.8);border-bottom:1px solid #222}
-.brand{font-weight:700;font-size:20px}
-.brand span{color:#777}
-.navlinks{display:flex;gap:28px;align-items:center}
-.navlinks a{color:inherit;text-decoration:none;font-size:14px;opacity:.7}
-.theme{border:0;background:transparent;color:white;font-size:20px}
-.hero{min-height:720px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 20px;background:radial-gradient(circle at 50% 40%,#242424,#050505 55%)}
-.eyebrow{font-size:12px;letter-spacing:.18em;font-weight:700;color:#888;margin-bottom:18px}
-.hero h1{font-size:clamp(60px,10vw,130px);line-height:.9;letter-spacing:-.075em;margin:0}
-.hero h1 em{font-style:normal;background:linear-gradient(90deg,#fff,#777);-webkit-background-clip:text;color:transparent}
-.sub{max-width:610px;color:#999;font-size:19px;line-height:1.5;margin:34px 0}
-.pill{padding:13px 22px;border-radius:999px;background:white;color:#000;text-decoration:none;font-weight:600}
-.section{max-width:1200px;margin:auto;padding:120px 6%}
-.section h2{font-size:clamp(42px,6vw,72px);letter-spacing:-.06em;margin:0 0 50px}
-.specgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.card{background:#111;border:1px solid #242424;border-radius:28px;padding:28px;min-height:145px;display:flex;flex-direction:column;justify-content:space-between}
-.card span,.gamecard span{font-size:12px;color:#777;text-transform:uppercase;letter-spacing:.12em}
-.card strong{font-size:21px}
-.gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.gamecard{overflow:hidden;border-radius:30px;background:#111;border:1px solid #242424}
-.gameimage{height:280px;background:linear-gradient(135deg,#252525,#080808)}
-.g1{background:linear-gradient(135deg,#3b4540,#101211)}
-.g2{background:linear-gradient(135deg,#45413a,#101010)}
-.g3{background:linear-gradient(135deg,#44352b,#0b0b0b)}
-.gamecard>div:last-child{padding:24px}
-.gamecard h3{font-size:28px;margin:8px 0}
-.gamecard p,.chatintro p{color:#888;line-height:1.5}
-.chatsection{padding:120px 6%;display:grid;grid-template-columns:1fr 1.2fr;gap:70px;max-width:1200px;margin:auto}
-.chatintro h2{font-size:72px;letter-spacing:-.07em;margin:0}
-.chatbox{background:#111;border:1px solid #292929;border-radius:30px;padding:20px;min-height:500px;display:flex;flex-direction:column}
-.messages{flex:1;display:flex;flex-direction:column;gap:12px}
-.bubble{max-width:78%;padding:14px 17px;border-radius:18px;line-height:1.45}
-.bubble.ai{background:#222;align-self:flex-start}
-.bubble.user{background:white;color:black;align-self:flex-end}
-.composer{display:flex;gap:10px;margin-top:18px}
-.composer input{flex:1;border:1px solid #333;background:transparent;color:white;border-radius:16px;padding:14px 16px;outline:none}
-.composer button{width:48px;border:0;border-radius:16px;background:white;color:black;font-size:20px}
-footer{text-align:center;color:#666;padding:60px 20px;border-top:1px solid #222}
-@media(max-width:750px){
-.navlinks a{display:none}
-.specgrid,.gamegrid,.chatsection{grid-template-columns:1fr}
-.chatsection{gap:45px}
-.hero{min-height:650px}
-.hero h1{font-size:62px}
-.section{padding:85px 5%}
-.chatintro h2{font-size:58px}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+               "Segoe UI", Arial, sans-serif;
+  background: #000;
+  color: #f5f5f7;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  background: rgba(0,0,0,.72);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.brand b {
+  color: #7c5cff;
+}
+
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 13px;
+  color: #b8b8bd;
+}
+
+.navlinks a {
+  transition: .25s;
+}
+
+.navlinks a:hover {
+  color: #fff;
+}
+
+.navbutton {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.hero {
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(91,64,255,.38), transparent 35%),
+    radial-gradient(circle at 20% 80%, rgba(0,160,255,.18), transparent 30%),
+    #000;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: rgba(105,72,255,.12);
+  filter: blur(100px);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 80px 25px;
+}
+
+.kicker {
+  color: #aaa;
+  font-size: 17px;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(64px, 9vw, 128px);
+  line-height: .92;
+  letter-spacing: -7px;
+  font-weight: 700;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #fff, #8d79ff, #50bfff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 35px auto;
+  color: #a1a1a6;
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+.ctas {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.primary,
+.secondary {
+  padding: 15px 25px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: .25s;
+}
+
+.primary {
+  background: #fff;
+  color: #000;
+}
+
+.secondary {
+  border: 1px solid #555;
+  color: #fff;
+}
+
+.primary:hover,
+.secondary:hover {
+  transform: translateY(-3px);
+}
+
+.section {
+  padding: 120px 7%;
+}
+
+.section.light {
+  background: #f5f5f7;
+  color: #111;
+}
+
+.section-title {
+  max-width: 850px;
+  margin-bottom: 70px;
+}
+
+.section-title .small {
+  font-size: 18px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.section-title h2 {
+  font-size: clamp(45px, 7vw, 88px);
+  line-height: .95;
+  letter-spacing: -5px;
+}
+
+.section-title p {
+  margin-top: 25px;
+  font-size: 20px;
+  color: #777;
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+/* SETUP */
+
+.setup-hero {
+  min-height: 650px;
+  border-radius: 38px;
+  padding: 70px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 70% 20%, #6c4fff, transparent 28%),
+    radial-gradient(circle at 20% 80%, #0c6bff, transparent 30%),
+    linear-gradient(135deg, #15151c, #020203);
+}
+
+.setup-hero::after {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  right: 12%;
+  top: 15%;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  filter: blur(5px);
+  box-shadow:
+    0 0 100px rgba(109,78,255,.7),
+    inset 0 0 100px rgba(255,255,255,.08);
+}
+
+.setup-content {
+  position: relative;
+  z-index: 2;
+}
+
+.setup-content span {
+  color: #b4b4bd;
+  font-size: 18px;
+}
+
+.setup-content h3 {
+  margin-top: 15px;
+  font-size: clamp(45px, 6vw, 78px);
+  letter-spacing: -4px;
+}
+
+.setup-content p {
+  margin-top: 20px;
+  max-width: 600px;
+  color: #aaa;
+  font-size: 20px;
+}
+
+/* CARDS */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  min-height: 330px;
+  border-radius: 30px;
+  padding: 35px;
+  background: #111;
+  border: 1px solid rgba(255,255,255,.08);
+  transition: transform .3s, border-color .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255,255,255,.25);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -60px;
+  bottom: -70px;
+  background: rgba(110,80,255,.2);
+  filter: blur(50px);
+}
+
+.card .icon {
+  font-size: 38px;
+  margin-bottom: 45px;
+}
+
+.card h3 {
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+
+.card p {
+  margin-top: 13px;
+  color: #999;
+  line-height: 1.5;
+}
+
+.spec {
+  margin-top: 30px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.light .card {
+  background: #fff;
+  border-color: #ddd;
+}
+
+.light .card p {
+  color: #777;
+}
+
+.light .card .spec {
+  color: #111;
+}
+
+/* PERFORMANCE */
+
+.performance {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(89,62,255,.25), transparent 30%),
+    #050507;
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 18px;
+}
+
+.performance-card {
+  min-height: 330px;
+  border-radius: 30px;
+  padding: 40px;
+  background: linear-gradient(145deg, #17171d, #08080a);
+  border: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.performance-card.big {
+  min-height: 450px;
+}
+
+.performance-card h3 {
+  font-size: 42px;
+  letter-spacing: -2px;
+}
+
+.performance-card .number {
+  font-size: clamp(60px, 7vw, 110px);
+  font-weight: 700;
+  letter-spacing: -6px;
+}
+
+.performance-card p {
+  color: #999;
+  font-size: 18px;
+}
+
+.performance-card small {
+  color: #777;
+}
+
+/* GAMES */
+
+.games {
+  background: #f5f5f7;
+  color: #111;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.game {
+  min-height: 450px;
+  border-radius: 35px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(135deg, #16161b, #050505);
+  color: white;
+}
+
+.game:nth-child(2) {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(80,120,255,.45), transparent 35%),
+    #101016;
+}
+
+.game:nth-child(3) {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,50,50,.25), transparent 35%),
+    #101010;
+}
+
+.game:nth-child(4) {
+  background:
+    radial-gradient(circle at 70% 40%, rgba(255,170,50,.3), transparent 35%),
+    #12100c;
+}
+
+.game-info {
+  position: relative;
+  z-index: 2;
+}
+
+.game-info span {
+  color: #aaa;
+  font-size: 15px;
+}
+
+.game-info h3 {
+  margin-top: 10px;
+  font-size: 45px;
+  letter-spacing: -2px;
+}
+
+.game-info p {
+  margin-top: 12px;
+  color: #aaa;
+}
+
+/* CHAT */
+
+.chat-section {
+  padding: 130px 7%;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(89,65,255,.3), transparent 35%),
+    #000;
+}
+
+.chat {
+  max-width: 1050px;
+  margin: auto;
+  border-radius: 35px;
+  overflow: hidden;
+  border: 1px solid #29292e;
+  background: #0d0d10;
+  box-shadow: 0 30px 100px rgba(0,0,0,.6);
+}
+
+.chat-head {
+  padding: 25px 30px;
+  border-bottom: 1px solid #29292e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.status {
+  font-size: 13px;
+  color: #65d98a;
+}
+
+.messages {
+  min-height: 360px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 30px;
+}
+
+.message {
+  max-width: 75%;
+  padding: 16px 19px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  line-height: 1.45;
+}
+
+.bot {
+  background: #1c1c21;
+  color: #ddd;
+}
+
+.user {
+  margin-left: auto;
+  background: #fff;
+  color: #000;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  padding: 18px;
+  border-top: 1px solid #29292e;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 15px 18px;
+  border-radius: 15px;
+  border: 1px solid #333;
+  background: #151519;
+  color: white;
+  outline: none;
+  font-size: 15px;
+}
+
+.chat-input button {
+  border: 0;
+  border-radius: 15px;
+  padding: 0 24px;
+  background: white;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 60px 7%;
+  border-top: 1px solid #222;
+  color: #777;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+footer strong {
+  color: white;
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+
+  .nav {
+    padding: 0 20px;
+  }
+
+  .navlinks a:not(.navbutton) {
+    display: none;
+  }
+
+  .hero h1 {
+    letter-spacing: -4px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .section {
+    padding: 80px 20px;
+  }
+
+  .section-title h2 {
+    letter-spacing: -3px;
+  }
+
+  .setup-hero {
+    padding: 35px;
+    min-height: 500px;
+    border-radius: 28px;
+  }
+
+  .grid,
+  .performance-grid,
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .performance-card {
+    min-height: 270px;
+  }
+
+  .performance-card.big {
+    min-height: 350px;
+  }
+
+  .game {
+    min-height: 350px;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .hero-content {
+    padding: 70px 18px;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+
+  .primary,
+  .secondary {
+    width: 100%;
+  }
+
+  .setup-content h3 {
+    font-size: 43px;
+  }
+
+  .card {
+    padding: 28px;
+  }
+
+  .performance-card {
+    padding: 30px;
+  }
+
+  .game {
+    padding: 28px;
+  }
+
+  .game-info h3 {
+    font-size: 36px;
+  }
 }
 </style>
 </head>
 
 <body>
-<main class="app">
 
 <nav class="nav">
-<div class="brand">GameChat<span>·</span></div>
-<div class="navlinks">
-<a href="#setup">Setup</a>
-<a href="#games">Games</a>
-<a href="#chat">AI Chat</a>
-</div>
+  <div class="brand">GameChat<b>·</b></div>
+
+  <div class="navlinks">
+    <a href="#setup">Setup</a>
+    <a href="#performance">Performance</a>
+    <a href="#games">Games</a>
+    <a href="#chat">AI Chat</a>
+    <a class="navbutton" href="#chat">Open Chat</a>
+  </div>
 </nav>
 
+
 <section class="hero">
-<p class="eyebrow">YOUR GAMING ECOSYSTEM</p>
-<h1>Your games.<br><em>Your setup.</em><br>One place.</h1>
-<p class="sub">A clean gaming hub built around your PC, your library and the games you actually care about.</p>
-<a class="pill" href="#setup">Explore my setup ↓</a>
+  <div class="hero-content">
+
+    <div class="kicker">
+      Personal gaming ecosystem
+    </div>
+
+    <h1>
+      Your games.<br>
+      <span class="gradient">Your setup.</span><br>
+      Your world.
+    </h1>
+
+    <p>
+      Everything about your gaming setup, library and performance —
+      brought together in one beautiful place.
+    </p>
+
+    <div class="ctas">
+      <a class="primary" href="#setup">
+        Explore my setup
+      </a>
+
+      <a class="secondary" href="#games">
+        Explore games
+      </a>
+    </div>
+
+  </div>
 </section>
 
-<section id="setup" class="section">
-<p class="eyebrow">MY SETUP</p>
-<h2>Built for gaming.</h2>
 
-<div class="specgrid">
+<section class="section" id="setup">
 
-<article class="card"><span>Graphics</span><strong>ASUS Dual GeForce RTX™ 5070 12GB GDDR7 OC Edition</strong></article>
+  <div class="section-title">
+    <div class="small">
+      The setup
+    </div>
 
-<article class="card"><span>Processor</span><strong>AMD Ryzen™ 7 7800X3D</strong></article>
+    <h2>
+      Built for gaming.
+      Designed around you.
+    </h2>
 
-<article class="card"><span>Motherboard</span><strong>ASUS ROG STRIX X870-F GAMING WIFI</strong></article>
+    <p>
+      My current gaming PC — from the GPU and processor
+      to storage, cooling and the operating system.
+    </p>
+  </div>
 
-<article class="card"><span>Cooling</span><strong>DeepCool AG400 BK ARGB</strong></article>
 
-<article class="card"><span>Memory</span><strong>G.Skill Trident Z5 Royal Neo</strong></article>
+  <div class="setup-hero">
 
-<article class="card"><span>Storage</span><strong>Samsung 9100 PRO</strong></article>
+    <div class="setup-content">
 
-<article class="card"><span>Power Supply</span><strong>LIAN LI EDGE 1000W</strong></article>
+      <span>MAIN SYSTEM</span>
 
-<article class="card"><span>Chassis</span><strong>Lian Li O11 Vision Compact Black</strong></article>
+      <h3>
+        RTX 5070 ×<br>
+        Ryzen 7 7800X3D
+      </h3>
 
-<article class="card"><span>Fans</span><strong>LIAN LI UNI FAN TL LCD 120</strong></article>
+      <p>
+        A high-performance gaming configuration
+        designed for high FPS, low latency and modern AAA games.
+      </p>
 
-<article class="card"><span>Operating System</span><strong>Windows 11 Pro</strong></article>
+    </div>
 
-</div>
+  </div>
+
 </section>
 
-<section id="games" class="section">
 
-<p class="eyebrow">LIBRARY</p>
-<h2>What are we playing?</h2>
+<section class="section light">
 
-<div class="gamegrid">
+  <div class="section-title">
+    <div class="small">
+      Hardware
+    </div>
 
-<article class="gamecard">
-<div class="gameimage"></div>
-<div><span>PC</span><h3>Resident Evil 4</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
-</article>
+    <h2>
+      Every component.
+      One system.
+    </h2>
+  </div>
 
-<article class="gamecard">
-<div class="gameimage g1"></div>
-<div><span>PC</span><h3>The Last of Us Part II</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
-</article>
 
-<article class="gamecard">
-<div class="gameimage g2"></div>
-<div><span>PC</span><h3>Space Marine 2</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
-</article>
+  <div class="grid">
 
-<article class="gamecard">
-<div class="gameimage g3"></div>
-<div><span>PC</span><h3>Atomic Heart</h3><p>Optimized for your RTX 5070 + 7800X3D.</p></div>
-</article>
+    <div class="card">
+      <div class="icon">◈</div>
 
-</div>
+      <h3>GeForce RTX 5070</h3>
+
+      <p>
+        ASUS Dual GeForce RTX 5070 OC Edition
+        with 12 GB of GDDR7 memory.
+      </p>
+
+      <div class="spec">
+        12 GB GDDR7
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">◉</div>
+
+      <h3>Ryzen 7 7800X3D</h3>
+
+      <p>
+        AMD gaming processor with
+        3D V-Cache technology.
+      </p>
+
+      <div class="spec">
+        8 cores · 16 threads
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">⌁</div>
+
+      <h3>ROG STRIX X870-F</h3>
+
+      <p>
+        Premium ASUS motherboard
+        built around the AM5 platform.
+      </p>
+
+      <div class="spec">
+        AMD AM5
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">❄</div>
+
+      <h3>DeepCool AG400</h3>
+
+      <p>
+        Compact tower CPU cooler
+        with ARGB lighting.
+      </p>
+
+      <div class="spec">
+        Air cooling
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">✦</div>
+
+      <h3>Trident Z5 Royal Neo</h3>
+
+      <p>
+        G.Skill premium DDR5 memory
+        with a distinctive design.
+      </p>
+
+      <div class="spec">
+        DDR5
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">▣</div>
+
+      <h3>Samsung 9100 PRO</h3>
+
+      <p>
+        High-performance PCIe 5.0 NVMe
+        storage for games and Windows.
+      </p>
+
+      <div class="spec">
+        PCIe 5.0
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">⚡</div>
+
+      <h3>LIAN LI EDGE</h3>
+
+      <p>
+        Premium 1000 W power supply
+        for the entire system.
+      </p>
+
+      <div class="spec">
+        1000 W
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">▦</div>
+
+      <h3>O11 Vision Compact</h3>
+
+      <p>
+        Black panoramic chassis
+        with a clean premium aesthetic.
+      </p>
+
+      <div class="spec">
+        Lian Li · Black
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">◌</div>
+
+      <h3>UNI FAN TL LCD</h3>
+
+      <p>
+        Lian Li wireless LCD fans
+        for cooling and customization.
+      </p>
+
+      <div class="spec">
+        120 mm LCD
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="icon">⊞</div>
+
+      <h3>Windows 11 Pro</h3>
+
+      <p>
+        Main operating system for gaming,
+        work and everyday use.
+      </p>
+
+      <div class="spec">
+        Windows 11 Pro
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
-<section id="chat" class="chatsection">
 
-<div class="chatintro">
-<p class="eyebrow">AI GAMING CHAT</p>
-<h2>Ask anything.</h2>
-<p>Games, graphics settings, FPS, hardware upgrades, what to buy next — all in one conversation.</p>
-</div>
+<section class="section performance" id="performance">
 
-<div class="chatbox">
+  <div class="section-title">
+    <div class="small">
+      Performance
+    </div>
 
-<div class="messages" id="messages">
-<div class="bubble ai">Привет. Я знаю твою сборку и могу помочь с играми, FPS, настройками и покупками.</div>
-</div>
+    <h2>
+      Power when you need it.
+    </h2>
 
-<div class="composer">
-<input id="input" placeholder="Ask about a game...">
-<button onclick="send()">↑</button>
-</div>
+    <p>
+      A balanced combination of CPU and GPU performance
+      focused on smooth gaming and low latency.
+    </p>
+  </div>
 
-</div>
+
+  <div class="performance-grid">
+
+    <div class="performance-card big">
+
+      <div>
+        <small>MAIN PERFORMANCE</small>
+
+        <h3>
+          RTX 5070<br>
+          × 7800X3D
+        </h3>
+      </div>
+
+      <div>
+        <div class="number">180+</div>
+        <p>Hz-ready gaming experience</p>
+      </div>
+
+    </div>
+
+
+    <div class="performance-card">
+
+      <div>
+        <small>MEMORY</small>
+      </div>
+
+      <div>
+        <div class="number">12</div>
+        <p>GB GDDR7</p>
+      </div>
+
+    </div>
+
+
+    <div class="performance-card">
+
+      <div>
+        <small>POWER</small>
+      </div>
+
+      <div>
+        <div class="number">1K</div>
+        <p>watts of PSU capacity</p>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-<footer>GameChat · Personal gaming hub · 2026</footer>
 
-</main>
+<section class="section games" id="games">
+
+  <div class="section-title">
+
+    <div class="small">
+      Game library
+    </div>
+
+    <h2>
+      What I'm playing.
+    </h2>
+
+    <p>
+      A selection of games from the current library.
+    </p>
+
+  </div>
+
+
+  <div class="game-grid">
+
+    <div class="game">
+      <div class="game-info">
+        <span>HORROR · ACTION</span>
+        <h3>Resident Evil 4</h3>
+        <p>Survival horror rebuilt from the ground up.</p>
+      </div>
+    </div>
+
+
+    <div class="game">
+      <div class="game-info">
+        <span>STORY · ACTION</span>
+        <h3>The Last of Us Part II</h3>
+        <p>A brutal and cinematic journey.</p>
+      </div>
+    </div>
+
+
+    <div class="game">
+      <div class="game-info">
+        <span>ACTION · SCI-FI</span>
+        <h3>Space Marine 2</h3>
+        <p>Massive battles against overwhelming forces.</p>
+      </div>
+    </div>
+
+
+    <div class="game">
+      <div class="game-info">
+        <span>ACTION · RPG</span>
+        <h3>Atomic Heart</h3>
+        <p>A surreal alternate-history adventure.</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="chat-section" id="chat">
+
+  <div class="section-title">
+
+    <div class="small">
+      GameChat AI
+    </div>
+
+    <h2>
+      Your gaming assistant.
+    </h2>
+
+    <p>
+      Ask about games, hardware, performance
+      or your setup.
+    </p>
+
+  </div>
+
+
+  <div class="chat">
+
+    <div class="chat-head">
+
+      <div class="chat-title">
+        GameChat
+      </div>
+
+      <div class="status">
+        ● Online
+      </div>
+
+    </div>
+
+
+    <div class="messages" id="messages">
+
+      <div class="message bot">
+        Привет 👋 Я GameChat.
+        Спроси меня о твоём ПК, играх или производительности.
+      </div>
+
+      <div class="message bot">
+        Например: «Потянет ли мой ПК Space Marine 2?»
+      </div>
+
+    </div>
+
+
+    <div class="chat-input">
+
+      <input
+        id="chatInput"
+        type="text"
+        placeholder="Напиши сообщение..."
+      >
+
+      <button onclick="sendMessage()">
+        Send
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <div>
+    <strong>GameChat</strong><br>
+    Personal gaming ecosystem.
+  </div>
+
+  <div>
+    RTX 5070 · 7800X3D · Windows 11 Pro
+  </div>
+
+</footer>
+
 
 <script>
-function send(){
-const input=document.getElementById("input");
-const messages=document.getElementById("messages");
-const text=input.value.trim();
-if(!text)return;
 
-messages.innerHTML+=
-'<div class="bubble user">'+text.replace(/</g,"&lt;")+'</div>'+
-'<div class="bubble ai">Демо-режим: интерфейс готов. Настоящий AI подключим следующим этапом.</div>';
+function sendMessage() {
 
-input.value="";
+  const input = document.getElementById("chatInput");
+  const messages = document.getElementById("messages");
+
+  const text = input.value.trim();
+
+  if (!text) return;
+
+
+  const userMessage = document.createElement("div");
+
+  userMessage.className = "message user";
+  userMessage.textContent = text;
+
+  messages.appendChild(userMessage);
+
+  input.value = "";
+
+  messages.scrollTop = messages.scrollHeight;
+
+
+  setTimeout(() => {
+
+    const botMessage = document.createElement("div");
+
+    botMessage.className = "message bot";
+
+    botMessage.textContent =
+      "Демо-режим: интерфейс готов. " +
+      "Настоящий AI backend подключим следующим этапом.";
+
+    messages.appendChild(botMessage);
+
+    messages.scrollTop = messages.scrollHeight;
+
+  }, 600);
+
 }
+
+
+document
+  .getElementById("chatInput")
+  .addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+
+  });
+
 </script>
 
 </body>
-</html>
+        </html>
